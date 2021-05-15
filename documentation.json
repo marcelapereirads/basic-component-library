@@ -249,6 +249,56 @@
             "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{ disabled: disabled }\" id=\"id\">\n    {{text}}\n</button>\n"
         },
         {
+            "name": "ErrorComponent",
+            "id": "component-ErrorComponent-a4335037f497e76d67d9810a6c770cb0",
+            "file": "projects/basic-component-lib/src/lib/error/error.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-error",
+            "styleUrls": [
+                "./error.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./error.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "control",
+                    "defaultValue": "new FormControl({ value: null })",
+                    "line": 10,
+                    "type": "FormControl"
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "line": 11
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n@Component({\n  selector: 'lib-error',\n  templateUrl: './error.component.html',\n  styleUrls: ['./error.component.scss']\n})\nexport class ErrorComponent {\n\n  @Input() control = new FormControl({ value: null });\n  @Input() message = '';\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".error {\n    color: red;\n\n    display: flex;\n    align-items: flex-end;\n    margin: 4px;\n\n    &__icon {\n        background: url(\"../../assets/svg/error.svg\") no-repeat;\n        height: 14px;\n        margin-right: 4px;\n        width: 14px;\n        background-size: cover;\n    }\n\n    &__message {\n        font-size: 14px;\n        height: 12px;\n        line-height: 14px;\n    }\n}\n",
+                    "styleUrl": "./error.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <img src=\"assets/svg/error.svg\" alt=\"error\" class=\"error__icon\" />\n    <div class=\"error__icon\"></div>\n    <span class=\"error__message\">{{message}}</span>\n</div>\n"
+        },
+        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
             "file": "src/stories/header.component.ts",
@@ -309,6 +359,108 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "InputComponent",
+            "id": "component-InputComponent-5f671614a73d4155d3e3c4703f32bcf0",
+            "file": "projects/basic-component-lib/src/lib/input/input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-input",
+            "styleUrls": [
+                "./input.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "control",
+                    "defaultValue": "new FormControl({value: null})",
+                    "line": 17,
+                    "type": "FormControl"
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "line": 14
+                },
+                {
+                    "name": "errors",
+                    "defaultValue": "[]",
+                    "line": 16,
+                    "type": "Array<string>"
+                },
+                {
+                    "name": "id",
+                    "defaultValue": "'input'",
+                    "line": 13
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "line": 12
+                },
+                {
+                    "name": "mask",
+                    "defaultValue": "''",
+                    "line": 15
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'text'",
+                    "line": 11
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChanges"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChanges",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'lib-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnChanges {\n\n  @Input() type = 'text';\n  @Input() label = '';\n  @Input() id = 'input';\n  @Input() disabled = false;\n  @Input() mask = '';\n  @Input() errors: Array<string> = [];\n  @Input() control = new FormControl({value: null});\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import \"../../assets/variables\";\n\n.input {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
+                    "styleUrl": "./input.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"input\">\n    <label [for]=\"id\">{{label}}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{disabled: disabled}\"\n    />\n    <lib-error [message]=\"errors[0]\" [control]=\"control\"></lib-error>\n</div>\n"
         },
         {
             "name": "PageComponent",
@@ -443,6 +595,84 @@
                     "elements": []
                 }
             ]
+        },
+        {
+            "name": "ErrorModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ErrorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "ErrorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "InputModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "ErrorModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
         }
     ],
     "miscellaneous": {
@@ -480,6 +710,22 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Enabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -494,6 +740,14 @@
                 "file": "src/environments/environment.ts",
                 "type": "object",
                 "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Large",
@@ -534,6 +788,22 @@
                 "file": "src/stories/Page.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Masked",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "ngxMaskModule",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/lib/input/input.module.ts",
+                "type": "",
+                "defaultValue": "NgxMaskModule.forRoot()"
             },
             {
                 "name": "Primary",
@@ -620,6 +890,14 @@
                 "file": "projects/basic-component-lib/src/stories/button.stories.ts",
                 "type": "Story<ButtonComponent>",
                 "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "Story<InputComponent>",
+                "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -700,6 +978,48 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-lib/src/test.ts",
                     "type": "literal type"
+                }
+            ],
+            "projects/basic-component-lib/src/stories/input.stories.ts": [
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Enabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Masked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/stories/input.stories.ts",
+                    "type": "Story<InputComponent>",
+                    "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -815,6 +1135,16 @@
                     "type": "Story<Page>",
                     "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
+            ],
+            "projects/basic-component-lib/src/lib/input/input.module.ts": [
+                {
+                    "name": "ngxMaskModule",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-lib/src/lib/input/input.module.ts",
+                    "type": "",
+                    "defaultValue": "NgxMaskModule.forRoot()"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -842,6 +1172,34 @@
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/lib/error/error.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ErrorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/lib/input/input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/lib/input/input.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ngxMaskModule",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -886,6 +1244,56 @@
             },
             {
                 "filePath": "projects/basic-component-lib/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Enabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Masked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-lib/src/stories/input.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

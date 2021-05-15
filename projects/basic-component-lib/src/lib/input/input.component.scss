@@ -1,0 +1,19 @@
+@import "../../assets/variables";
+
+.input {
+    display: flex;
+    flex-direction: column;
+
+    &__field {
+        border: solid 1px;
+        border-radius: 7px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.disabled {
+    background-color: $light-gray;
+}

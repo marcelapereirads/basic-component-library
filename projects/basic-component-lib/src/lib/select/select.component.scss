@@ -1,0 +1,25 @@
+@import "../../assets/variables";
+
+.select {
+    display: flex;
+    flex-direction: column;
+
+    &__field {
+        background-color: $white;
+        border: solid 1px;
+        border-radius: 7px;
+        height: 28px;
+        &:focus {
+            outline: none;
+        }
+    }
+    &__option {
+        &:checked {
+            background-color: $navy-blue;
+            color: $yellow;
+        }
+    }
+}
+.disabled {
+    background-color: $light-gray;
+}
