@@ -1,0 +1,32 @@
+@import "../../assets/variables";
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 8px;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.primary {
+    background-color: $navy-blue;
+    color: $white;
+}
+
+.secondary {
+    background-color: $yellow;
+    color: $navy-blue;
+}
+
+.disabled {
+    background-color: $light-gray;
+    color: $dark-gray;
+
+    &:hover {
+        text-decoration: none;
+        cursor: default;
+    }
+}

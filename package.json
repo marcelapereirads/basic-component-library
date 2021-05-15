@@ -4,12 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build": "ng build basic-component-lib --prod",
+    "pack": "cd ../../dist/basic-component-lib && npm pack",
+    "package": "cd projects/basic-component-lib && npm run build && npm run pack",
+    "publish": "npm publish --access public"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~11.2.13",
     "@angular/common": "~11.2.13",
