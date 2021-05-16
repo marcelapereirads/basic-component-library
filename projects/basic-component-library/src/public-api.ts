@@ -1,5 +1,5 @@
 /*
- * Public API Surface of basic-component-lib
+ * Public API Surface of basic-component-library
  */
 
 export * from './lib/button/button.module';

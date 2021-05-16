@@ -1,5 +1,5 @@
 {
-  "name": "basic-component-library",
+  "name": "components-library",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,9 +7,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build": "cd projects/basic-component-lib && ng build basic-component-lib --prod & cd ../..",
-    "pack": "cd dist/basic-component-lib && npm pack && cd ../..",
-    "publish": "cd dist/basic-component-lib && npm publish --access public && cd ../..",
+    "build": "cd projects/basic-component-library && ng build basic-component-library --prod & cd ../..",
+    "pack": "cd dist/basic-component-library && npm pack && cd ../..",
+    "publish": "cd dist/basic-component-library && npm publish --access public && cd ../..",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"

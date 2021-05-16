@@ -4,9 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "basic-component-lib": [
-        "dist/basic-component-lib/basic-component-lib",
-        "dist/basic-component-lib"
+      "basic-component-library": [
+        "dist/basic-component-library/basic-component-library",
+        "dist/basic-component-library"
       ]
     },
     "outDir": "./dist/out-tsc",

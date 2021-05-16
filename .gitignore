@@ -10,7 +10,7 @@
 
 # dependencies
 /node_modules
-/projects/basic-component-lib/node_modules
+/projects/basic-component-library/node_modules
 
 # profiling files
 chrome-profiler-events*.json
