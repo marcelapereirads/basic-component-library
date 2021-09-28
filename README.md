@@ -12,3 +12,9 @@ This library was created initially with 3 components and is used in the [using-m
 
 ### Running the Storybook:
 > npm run storybook
+
+### Building the project:
+> npm run build && npm run pack
+
+### Publish to NPM
+>  npm run publish
