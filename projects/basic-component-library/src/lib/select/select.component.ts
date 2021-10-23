@@ -7,7 +7,6 @@ type Option = {
   viewValue: string;
 };
 
-
 @Component({
   selector: 'lib-select',
   templateUrl: './select.component.html',
