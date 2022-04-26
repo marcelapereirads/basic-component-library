@@ -1,12 +1,11 @@
 <div class="input">
-    <label [for]="id">{{label}}</label>
+    <label [for]="id">{{ label }}</label>
     <input
         [type]="type"
         [id]="id"
         class="input__field"
         [mask]="mask"
         [formControl]="control"
-        [ngClass]="{disabled: disabled}"
-    />
+        [ngClass]="{ disabled: disabled }" />
     <lib-error [message]="errors[0]" [control]="control"></lib-error>
 </div>

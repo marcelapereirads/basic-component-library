@@ -18,9 +18,7 @@
                     "returnType": "Promise<string>",
                     "typeParameters": [],
                     "line": 8,
-                    "modifierKind": [
-                        120
-                    ]
+                    "modifierKind": [120]
                 },
                 {
                     "name": "navigateTo",
@@ -29,9 +27,7 @@
                     "returnType": "Promise<unknown>",
                     "typeParameters": [],
                     "line": 4,
-                    "modifierKind": [
-                        120
-                    ]
+                    "modifierKind": [120]
                 }
             ],
             "indexSignatures": [],
@@ -55,9 +51,7 @@
             "selector": "app-root",
             "styleUrls": [],
             "styles": [],
-            "templateUrl": [
-                "./app.component.html"
-            ],
+            "templateUrl": ["./app.component.html"],
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
@@ -93,9 +87,7 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-button",
-            "styleUrls": [
-                "./button.css"
-            ],
+            "styleUrls": ["./button.css"],
             "styles": [],
             "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
             "templateUrl": [],
@@ -174,13 +166,9 @@
             "outputs": [],
             "providers": [],
             "selector": "lib-button",
-            "styleUrls": [
-                "./button.component.scss"
-            ],
+            "styleUrls": ["./button.component.scss"],
             "styles": [],
-            "templateUrl": [
-                "./button.component.html"
-            ],
+            "templateUrl": ["./button.component.html"],
             "viewProviders": [],
             "inputsClass": [
                 {
@@ -251,13 +239,9 @@
             "outputs": [],
             "providers": [],
             "selector": "lib-error",
-            "styleUrls": [
-                "./error.component.scss"
-            ],
+            "styleUrls": ["./error.component.scss"],
             "styles": [],
-            "templateUrl": [
-                "./error.component.html"
-            ],
+            "templateUrl": ["./error.component.html"],
             "viewProviders": [],
             "inputsClass": [
                 {
@@ -301,9 +285,7 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
+            "styleUrls": ["./header.css"],
             "styles": [],
             "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
             "templateUrl": [],
@@ -363,13 +345,9 @@
             "outputs": [],
             "providers": [],
             "selector": "lib-input",
-            "styleUrls": [
-                "./input.component.scss"
-            ],
+            "styleUrls": ["./input.component.scss"],
             "styles": [],
-            "templateUrl": [
-                "./input.component.html"
-            ],
+            "templateUrl": ["./input.component.html"],
             "viewProviders": [],
             "inputsClass": [
                 {
@@ -450,9 +428,7 @@
                 }
             ],
             "stylesData": "",
-            "implements": [
-                "OnChanges"
-            ],
+            "implements": ["OnChanges"],
             "templateData": "<div class=\"input\">\n    <label [for]=\"id\">{{label}}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{disabled: disabled}\"\n    />\n    <lib-error [message]=\"errors[0]\" [control]=\"control\"></lib-error>\n</div>\n"
         },
         {
@@ -465,9 +441,7 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-page",
-            "styleUrls": [
-                "./page.css"
-            ],
+            "styleUrls": ["./page.css"],
             "styles": [],
             "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
             "templateUrl": [],
@@ -527,13 +501,9 @@
             "outputs": [],
             "providers": [],
             "selector": "lib-select",
-            "styleUrls": [
-                "./select.component.scss"
-            ],
+            "styleUrls": ["./select.component.scss"],
             "styles": [],
-            "templateUrl": [
-                "./select.component.html"
-            ],
+            "templateUrl": ["./select.component.html"],
             "viewProviders": [],
             "inputsClass": [
                 {
@@ -609,9 +579,7 @@
                 }
             ],
             "stylesData": "",
-            "implements": [
-                "OnChanges"
-            ],
+            "implements": ["OnChanges"],
             "templateData": "<div class=\"select\">\n    <label [for]=\"id\">{{label}}</label>\n    <select class=\"select__field\" [ngClass]=\"{disabled: disabled}\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">{{ opt.viewValue }}</option>\n    </select>\n    <lib-error [message]=\"error\" [control]=\"control\"></lib-error>\n</div>\n"
         }
     ],

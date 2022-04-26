@@ -5,17 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorModule } from '../error/error.module';
 
 @NgModule({
-  declarations: [
-    SelectComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ErrorModule
-  ],
-  exports: [
-    SelectComponent
-  ]
+    declarations: [SelectComponent],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, ErrorModule],
+    exports: [SelectComponent],
 })
-export class SelectModule { }
+export class SelectModule {}

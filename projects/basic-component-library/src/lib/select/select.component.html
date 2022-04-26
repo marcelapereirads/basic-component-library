@@ -1,8 +1,10 @@
 <div class="select">
-    <label [for]="id">{{label}}</label>
-    <select class="select__field" [ngClass]="{disabled: disabled}" [formControl]="control">
+    <label [for]="id">{{ label }}</label>
+    <select class="select__field" [ngClass]="{ disabled: disabled }" [formControl]="control">
         <option></option>
-        <option *ngFor="let opt of options" value="opt.value" class="select__option">{{ opt.viewValue }}</option>
+        <option *ngFor="let opt of options" value="opt.value" class="select__option">
+            {{ opt.viewValue }}
+        </option>
     </select>
     <lib-error [message]="error" [control]="control"></lib-error>
 </div>

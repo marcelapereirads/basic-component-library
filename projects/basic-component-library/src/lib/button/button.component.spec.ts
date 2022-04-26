@@ -3,76 +3,74 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 describe('ButtonComponent', () => {
-  let fixture: ComponentFixture<ButtonComponent>;
-  let component: ButtonComponent;
+    let fixture: ComponentFixture<ButtonComponent>;
+    let component: ButtonComponent;
 
-  const mockAction = () => {}
+    const mockAction = () => {};
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        ButtonComponent
-      ],
-    }).compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ButtonComponent],
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ButtonComponent);
-    component = fixture.componentInstance;
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ButtonComponent);
+        component = fixture.componentInstance;
 
-    fixture.detectChanges();
-  });
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should use primary style', () => {
-    component.type = 'primary';
+    it('should use primary style', () => {
+        component.type = 'primary';
 
-    fixture.detectChanges();
+        fixture.detectChanges();
 
-    const primaryButton = fixture.debugElement.query(By.css('.primary'));
-    const secondaryButton = fixture.debugElement.query(By.css('.secondary'));
+        const primaryButton = fixture.debugElement.query(By.css('.primary'));
+        const secondaryButton = fixture.debugElement.query(By.css('.secondary'));
 
-    expect(primaryButton).toBeTruthy();
-    expect(secondaryButton).toBeFalsy();
-  });
+        expect(primaryButton).toBeTruthy();
+        expect(secondaryButton).toBeFalsy();
+    });
 
-  it('should use secondary style', () => {
-    component.type = 'secondary';
+    it('should use secondary style', () => {
+        component.type = 'secondary';
 
-    fixture.detectChanges();
+        fixture.detectChanges();
 
-    const primaryButton = fixture.debugElement.query(By.css('.primary'));
-    const secondaryButton = fixture.debugElement.query(By.css('.secondary'));
+        const primaryButton = fixture.debugElement.query(By.css('.primary'));
+        const secondaryButton = fixture.debugElement.query(By.css('.secondary'));
 
-    expect(primaryButton).toBeFalsy();
-    expect(secondaryButton).toBeTruthy();
-  });
+        expect(primaryButton).toBeFalsy();
+        expect(secondaryButton).toBeTruthy();
+    });
 
-  it('should disable button', () => {
-    const spy = spyOn(component, 'action');
+    it('should disable button', () => {
+        const spy = spyOn(component, 'action');
 
-    component.action = mockAction;
-    component.disabled = true;
-    fixture.detectChanges();
+        component.action = mockAction;
+        component.disabled = true;
+        fixture.detectChanges();
 
-    const button = fixture.debugElement.query(By.css('.primary'));
+        const button = fixture.debugElement.query(By.css('.primary'));
 
-    expect(button.nativeElement).toHaveClass('disabled');
+        expect(button.nativeElement).toHaveClass('disabled');
 
-    component.handleClick();
-    expect(spy).not.toHaveBeenCalled();
-  });
+        component.handleClick();
+        expect(spy).not.toHaveBeenCalled();
+    });
 
-  it('show enable button', () => {
-    component.action = mockAction;
+    it('show enable button', () => {
+        component.action = mockAction;
 
-    const button = fixture.debugElement.query(By.css('.primary'));
-    const spy = spyOn(component, 'action');
+        const button = fixture.debugElement.query(By.css('.primary'));
+        const spy = spyOn(component, 'action');
 
-    component.handleClick();
-    expect(spy).toHaveBeenCalled();
-  });
+        component.handleClick();
+        expect(spy).toHaveBeenCalled();
+    });
 });

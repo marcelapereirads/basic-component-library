@@ -10,18 +10,8 @@ import { ErrorModule } from '../error/error.module';
 export const ngxMaskModule = NgxMaskModule.forRoot();
 
 @NgModule({
-  declarations: [
-    InputComponent
-  ],
-  imports: [
-    CommonModule,
-    ngxMaskModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ErrorModule
-  ],
-  exports: [
-    InputComponent
-  ]
+    declarations: [InputComponent],
+    imports: [CommonModule, ngxMaskModule, FormsModule, ReactiveFormsModule, ErrorModule],
+    exports: [InputComponent],
 })
-export class InputModule { }
+export class InputModule {}
