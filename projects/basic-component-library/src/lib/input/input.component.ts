@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'lib-input',
+    selector: 'base-input',
     templateUrl: './input.component.html',
     styleUrls: ['./input.component.scss'],
 })

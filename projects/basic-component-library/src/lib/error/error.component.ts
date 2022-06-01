@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 @Component({
-    selector: 'lib-error',
+    selector: 'base-error',
     templateUrl: './error.component.html',
     styleUrls: ['./error.component.scss'],
 })

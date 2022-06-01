@@ -118,7 +118,7 @@
             "projectType": "library",
             "root": "projects/basic-component-library",
             "sourceRoot": "projects/basic-component-library/src",
-            "prefix": "lib",
+            "prefix": "base",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:ng-packagr",

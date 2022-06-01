@@ -7,7 +7,7 @@ type Option = {
 };
 
 @Component({
-    selector: 'lib-select',
+    selector: 'base-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
 })
