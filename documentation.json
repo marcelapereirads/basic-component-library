@@ -5,10 +5,10 @@
     "classes": [
         {
             "name": "AppPage",
-            "id": "class-AppPage-ee2067dfb1c303f41003aea7d82d51e0",
+            "id": "class-AppPage-b1fb6c4baa5c8654be92c5b3586f4d65",
             "file": "e2e/src/app.po.ts",
             "type": "class",
-            "sourceCode": "import { browser, by, element } from 'protractor';\n\nexport class AppPage {\n  async navigateTo(): Promise<unknown> {\n    return browser.get(browser.baseUrl);\n  }\n\n  async getTitleText(): Promise<string> {\n    return element(by.css('app-root .content span')).getText();\n  }\n}\n",
+            "sourceCode": "import { browser, by, element } from 'protractor';\n\nexport class AppPage {\n    async navigateTo(): Promise<unknown> {\n        return browser.get(browser.baseUrl);\n    }\n\n    async getTitleText(): Promise<string> {\n        return element(by.css('app-root .content span')).getText();\n    }\n}\n",
             "properties": [],
             "methods": [
                 {
@@ -18,7 +18,9 @@
                     "returnType": "Promise<string>",
                     "typeParameters": [],
                     "line": 8,
-                    "modifierKind": [120]
+                    "modifierKind": [
+                        120
+                    ]
                 },
                 {
                     "name": "navigateTo",
@@ -27,7 +29,9 @@
                     "returnType": "Promise<unknown>",
                     "typeParameters": [],
                     "line": 4,
-                    "modifierKind": [120]
+                    "modifierKind": [
+                        120
+                    ]
                 }
             ],
             "indexSignatures": [],
@@ -41,7 +45,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-debbd904bd16e39060c59c1267df5ff1",
+            "id": "component-AppComponent-dceca1fb595c584c63aae4f31ace4f10",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -51,7 +55,9 @@
             "selector": "app-root",
             "styleUrls": [],
             "styles": [],
-            "templateUrl": ["./app.component.html"],
+            "templateUrl": [
+                "./app.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
@@ -71,15 +77,15 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class AppComponent {\n  title = 'components-library';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-root',\n    templateUrl: './app.component.html',\n})\nexport class AppComponent {\n    title = 'components-library';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\">Access the NPM Link</a> "
+            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<!--  --><base-button>teste</base-button>"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-642c6c4e474cd5a0ac760dfda26b2fc9",
+            "id": "component-ButtonComponent-75fb5830ae9abb62ab37899608b4dc24",
             "file": "src/stories/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -87,35 +93,37 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-button",
-            "styleUrls": ["./button.css"],
+            "styleUrls": [
+                "./button.css"
+            ],
             "styles": [],
-            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "template": "<button       type=\"button\"\n       (click)=\"onClick.emit($event)\"\n       [ngClass]=\"classes\"\n       [ngStyle]=\"{ 'background-color': backgroundColor }\">\n       {{ label }}\n   </button>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "backgroundColor",
                     "description": "<p>What background color to use</p>\n",
-                    "line": 26,
+                    "line": 25,
                     "type": "string"
                 },
                 {
                     "name": "label",
                     "defaultValue": "'Button'",
                     "description": "<p>Button contents</p>\n",
-                    "line": 40
+                    "line": 39
                 },
                 {
                     "name": "primary",
                     "defaultValue": "false",
                     "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 20
+                    "line": 19
                 },
                 {
                     "name": "size",
                     "defaultValue": "'medium'",
                     "description": "<p>How large should the button be?</p>\n",
-                    "line": 32,
+                    "line": 31,
                     "type": "\"small\" | \"medium\" | \"large\""
                 }
             ],
@@ -124,7 +132,7 @@
                     "name": "onClick",
                     "defaultValue": "new EventEmitter<Event>()",
                     "description": "<p>Optional click handler</p>\n",
-                    "line": 46,
+                    "line": 45,
                     "type": "EventEmitter"
                 }
             ],
@@ -135,11 +143,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n    selector: 'storybook-button',\n    template: ` <button\n        type=\"button\"\n        (click)=\"onClick.emit($event)\"\n        [ngClass]=\"classes\"\n        [ngStyle]=\"{ 'background-color': backgroundColor }\">\n        {{ label }}\n    </button>`,\n    styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n    /**\n     * Is this the principal call to action on the page?\n     */\n    @Input()\n    primary = false;\n\n    /**\n     * What background color to use\n     */\n    @Input()\n    backgroundColor?: string;\n\n    /**\n     * How large should the button be?\n     */\n    @Input()\n    size: 'small' | 'medium' | 'large' = 'medium';\n\n    /**\n     * Button contents\n     *\n     * @required\n     */\n    @Input()\n    label = 'Button';\n\n    /**\n     * Optional click handler\n     */\n    @Output()\n    onClick = new EventEmitter<Event>();\n\n    public get classes(): string[] {\n        const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n        return ['storybook-button', `storybook-button--${this.size}`, mode];\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "data": ".storybook-button {\n    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n    font-weight: 700;\n    border: 0;\n    border-radius: 3em;\n    cursor: pointer;\n    display: inline-block;\n    line-height: 1;\n}\n.storybook-button--primary {\n    color: white;\n    background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n    color: #333;\n    background-color: transparent;\n    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n    font-size: 12px;\n    padding: 10px 16px;\n}\n.storybook-button--medium {\n    font-size: 14px;\n    padding: 11px 20px;\n}\n.storybook-button--large {\n    font-size: 16px;\n    padding: 12px 24px;\n}\n",
                     "styleUrl": "./button.css"
                 }
             ],
@@ -151,50 +159,49 @@
                         "name": "classes",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 48
+                        "line": 47
                     }
                 }
             }
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-4bd69aaa23db2062be9862f09ceaeb50-1",
+            "id": "component-ButtonComponent-f40c67bdb6cc02701462e4fdfd4331cc-1",
             "file": "projects/basic-component-library/src/lib/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-button",
-            "styleUrls": ["./button.component.scss"],
+            "selector": "base-button",
+            "styleUrls": [
+                "./button.component.scss"
+            ],
             "styles": [],
-            "templateUrl": ["./button.component.html"],
+            "templateUrl": [
+                "./button.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "action",
                     "defaultValue": "() => {}",
-                    "line": 14
+                    "line": 12
                 },
                 {
                     "name": "disabled",
                     "defaultValue": "false",
-                    "line": 13
+                    "line": 11
                 },
                 {
                     "name": "id",
                     "defaultValue": "''",
-                    "line": 12
-                },
-                {
-                    "name": "text",
-                    "defaultValue": "'Button'",
                     "line": 10
                 },
                 {
                     "name": "type",
                     "defaultValue": "'primary'",
-                    "line": 11,
+                    "line": 9,
                     "type": "\"primary\" | \"secondary\""
                 }
             ],
@@ -207,7 +214,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16
+                    "line": 14
                 }
             ],
             "hostBindings": [],
@@ -215,11 +222,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent {\n\n  @Input() text = 'Button';\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() action = () => {};\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n    selector: 'base-button',\n    templateUrl: './button.component.html',\n    styleUrls: ['./button.component.scss'],\n})\nexport class ButtonComponent {\n    @Input() type: 'primary' | 'secondary' = 'primary';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() action = () => {};\n\n    handleClick() {\n        if (!this.disabled) {\n            this.action();\n        }\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"../../assets/variables\";\n\nbutton {\n    border: none;\n    border-radius: 7px;\n    padding: 8px;\n    font-weight: bold;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\n.primary {\n    background-color: $navy-blue;\n    color: $white;\n}\n\n.secondary {\n    background-color: $yellow;\n    color: $navy-blue;\n}\n\n.disabled {\n    background-color: $light-gray;\n    color: $dark-gray;\n\n    &:hover {\n        text-decoration: none;\n        cursor: default;\n    }\n}",
+                    "data": "@import '../../assets/variables';\n\nbutton {\n    border: none;\n    border-radius: 7px;\n    padding: 8px;\n    font-weight: bold;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\n.primary {\n    background-color: $navy-blue;\n    color: $white;\n}\n\n.secondary {\n    background-color: $yellow;\n    color: $navy-blue;\n}\n\n.disabled {\n    background-color: $light-gray;\n    color: $dark-gray;\n\n    &:hover {\n        text-decoration: none;\n        cursor: default;\n    }\n}\n",
                     "styleUrl": "./button.component.scss"
                 }
             ],
@@ -227,33 +234,37 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "ButtonComponent-1",
-            "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{ disabled: disabled }\" id=\"id\">\n    {{text}}\n</button>\n"
+            "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{ disabled: disabled }\" id=\"id\">\n    <ng-content></ng-content>\n</button>\n"
         },
         {
             "name": "ErrorComponent",
-            "id": "component-ErrorComponent-241f8c3e9a7bd79f7a8d34eead1436bf",
+            "id": "component-ErrorComponent-22b48106d99123d255e0f0f02f987539",
             "file": "projects/basic-component-library/src/lib/error/error.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-error",
-            "styleUrls": ["./error.component.scss"],
+            "selector": "base-error",
+            "styleUrls": [
+                "./error.component.scss"
+            ],
             "styles": [],
-            "templateUrl": ["./error.component.html"],
+            "templateUrl": [
+                "./error.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "control",
                     "defaultValue": "new FormControl({ value: null })",
-                    "line": 10,
+                    "line": 9,
                     "type": "FormControl"
                 },
                 {
                     "name": "message",
                     "defaultValue": "''",
-                    "line": 11
+                    "line": 10
                 }
             ],
             "outputsClass": [],
@@ -264,20 +275,20 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n@Component({\n  selector: 'lib-error',\n  templateUrl: './error.component.html',\n  styleUrls: ['./error.component.scss']\n})\nexport class ErrorComponent {\n\n  @Input() control = new FormControl({ value: null });\n  @Input() message = '';\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n@Component({\n    selector: 'base-error',\n    templateUrl: './error.component.html',\n    styleUrls: ['./error.component.scss'],\n})\nexport class ErrorComponent {\n    @Input() control = new FormControl({ value: null });\n    @Input() message = '';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".error {\n    color: red;\n\n    display: flex;\n    align-items: flex-end;\n    margin: 4px;\n\n    &__icon {\n        background: url(\"../../assets/svg/error.svg\") no-repeat;\n        height: 14px;\n        margin-right: 4px;\n        width: 14px;\n        background-size: cover;\n    }\n\n    &__message {\n        font-size: 14px;\n        height: 12px;\n        line-height: 14px;\n    }\n}\n",
+                    "data": ".error {\n    color: red;\n\n    display: flex;\n    align-items: flex-end;\n    margin: 4px;\n\n    &__icon {\n        background: url('../../assets/svg/error.svg') no-repeat;\n        height: 14px;\n        margin-right: 4px;\n        width: 14px;\n        background-size: cover;\n    }\n\n    &__message {\n        font-size: 14px;\n        height: 12px;\n        line-height: 14px;\n    }\n}\n",
                     "styleUrl": "./error.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <div class=\"error__icon\"></div>\n    <span class=\"error__message\">{{message}}</span>\n</div>\n"
+            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <div class=\"error__icon\"></div>\n    <span class=\"error__message\">{{ message }}</span>\n</div>\n"
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
+            "id": "component-HeaderComponent-b5b874d3144728d6548c70617979cec1",
             "file": "src/stories/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -285,16 +296,18 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-header",
-            "styleUrls": ["./header.css"],
+            "styleUrls": [
+                "./header.css"
+            ],
             "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
+            "template": "<header>        <div class=\"wrapper\">\n            <div>\n                <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <g fill=\"none\" fillRule=\"evenodd\">\n                        <path\n                            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n                            fill=\"#FFF\" />\n                        <path\n                            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n                            fill=\"#555AB9\" />\n                        <path\n                            d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n                            fill=\"#91BAF8\" />\n                    </g>\n                </svg>\n                <h1>Acme</h1>\n            </div>\n            <div>\n                <storybook-button\n                    *ngIf=\"user\"\n                    size=\"small\"\n                    (onClick)=\"onLogout.emit($event)\"\n                    label=\"Log out\"></storybook-button>\n                <storybook-button\n                    *ngIf=\"!user\"\n                    size=\"small\"\n                    (onClick)=\"onLogin.emit($event)\"\n                    label=\"Log in\"></storybook-button>\n                <storybook-button\n                    *ngIf=\"!user\"\n                    primary\n                    size=\"small\"\n                    (onClick)=\"onCreateAccount.emit($event)\"\n                    label=\"Sign up\"></storybook-button>\n            </div>\n        </div>\n    </header>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "user",
                     "defaultValue": "null",
-                    "line": 53,
+                    "line": 47,
                     "type": "unknown"
                 }
             ],
@@ -302,19 +315,19 @@
                 {
                     "name": "onCreateAccount",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 62,
+                    "line": 56,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogin",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 56,
+                    "line": 50,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogout",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 59,
+                    "line": 53,
                     "type": "EventEmitter"
                 }
             ],
@@ -325,11 +338,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n    selector: 'storybook-header',\n    template: `<header>\n        <div class=\"wrapper\">\n            <div>\n                <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <g fill=\"none\" fillRule=\"evenodd\">\n                        <path\n                            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n                            fill=\"#FFF\" />\n                        <path\n                            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n                            fill=\"#555AB9\" />\n                        <path\n                            d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n                            fill=\"#91BAF8\" />\n                    </g>\n                </svg>\n                <h1>Acme</h1>\n            </div>\n            <div>\n                <storybook-button\n                    *ngIf=\"user\"\n                    size=\"small\"\n                    (onClick)=\"onLogout.emit($event)\"\n                    label=\"Log out\"></storybook-button>\n                <storybook-button\n                    *ngIf=\"!user\"\n                    size=\"small\"\n                    (onClick)=\"onLogin.emit($event)\"\n                    label=\"Log in\"></storybook-button>\n                <storybook-button\n                    *ngIf=\"!user\"\n                    primary\n                    size=\"small\"\n                    (onClick)=\"onCreateAccount.emit($event)\"\n                    label=\"Sign up\"></storybook-button>\n            </div>\n        </div>\n    </header>`,\n    styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n    @Input()\n    user: unknown = null;\n\n    @Output()\n    onLogin = new EventEmitter<Event>();\n\n    @Output()\n    onLogout = new EventEmitter<Event>();\n\n    @Output()\n    onCreateAccount = new EventEmitter<Event>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n",
+                    "data": ".wrapper {\n    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n    padding: 15px 20px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\nsvg {\n    display: inline-block;\n    vertical-align: top;\n}\n\nh1 {\n    font-weight: 900;\n    font-size: 20px;\n    line-height: 1;\n    margin: 6px 0 6px 10px;\n    display: inline-block;\n    vertical-align: top;\n}\n\nbutton + button {\n    margin-left: 10px;\n}\n",
                     "styleUrl": "./header.css"
                 }
             ],
@@ -337,55 +350,59 @@
         },
         {
             "name": "InputComponent",
-            "id": "component-InputComponent-5f671614a73d4155d3e3c4703f32bcf0",
+            "id": "component-InputComponent-48da343302d92455374957d2adccefe4",
             "file": "projects/basic-component-library/src/lib/input/input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-input",
-            "styleUrls": ["./input.component.scss"],
+            "selector": "base-input",
+            "styleUrls": [
+                "./input.component.scss"
+            ],
             "styles": [],
-            "templateUrl": ["./input.component.html"],
+            "templateUrl": [
+                "./input.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "control",
-                    "defaultValue": "new FormControl({value: null})",
-                    "line": 17,
+                    "defaultValue": "new FormControl({ value: null })",
+                    "line": 16,
                     "type": "FormControl"
                 },
                 {
                     "name": "disabled",
                     "defaultValue": "false",
-                    "line": 14
+                    "line": 13
                 },
                 {
                     "name": "errors",
                     "defaultValue": "[]",
-                    "line": 16,
+                    "line": 15,
                     "type": "Array<string>"
                 },
                 {
                     "name": "id",
                     "defaultValue": "'input'",
-                    "line": 13
+                    "line": 12
                 },
                 {
                     "name": "label",
                     "defaultValue": "''",
-                    "line": 12
+                    "line": 11
                 },
                 {
                     "name": "mask",
                     "defaultValue": "''",
-                    "line": 15
+                    "line": 14
                 },
                 {
                     "name": "type",
                     "defaultValue": "'text'",
-                    "line": 11
+                    "line": 10
                 }
             ],
             "outputsClass": [],
@@ -402,7 +419,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 18,
                     "jsdoctags": [
                         {
                             "name": "change",
@@ -419,21 +436,23 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'lib-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnChanges {\n\n  @Input() type = 'text';\n  @Input() label = '';\n  @Input() id = 'input';\n  @Input() disabled = false;\n  @Input() mask = '';\n  @Input() errors: Array<string> = [];\n  @Input() control = new FormControl({value: null});\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n    selector: 'base-input',\n    templateUrl: './input.component.html',\n    styleUrls: ['./input.component.scss'],\n})\nexport class InputComponent implements OnChanges {\n    @Input() type = 'text';\n    @Input() label = '';\n    @Input() id = 'input';\n    @Input() disabled = false;\n    @Input() mask = '';\n    @Input() errors: Array<string> = [];\n    @Input() control = new FormControl({ value: null });\n\n    ngOnChanges(change: SimpleChanges) {\n        if (change.disabled?.currentValue) {\n            this.control.disable();\n        } else if (change.disabled?.currentValue === false) {\n            this.control.enable();\n        }\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"../../assets/variables\";\n\n.input {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
+                    "data": "@import '../../assets/variables';\n\n.input {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
                     "styleUrl": "./input.component.scss"
                 }
             ],
             "stylesData": "",
-            "implements": ["OnChanges"],
-            "templateData": "<div class=\"input\">\n    <label [for]=\"id\">{{label}}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{disabled: disabled}\"\n    />\n    <lib-error [message]=\"errors[0]\" [control]=\"control\"></lib-error>\n</div>\n"
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"input\">\n    <label [for]=\"id\">{{ label }}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{ disabled: disabled }\" />\n    <base-error [message]=\"errors[0]\" [control]=\"control\"></base-error>\n</div>\n"
         },
         {
             "name": "PageComponent",
-            "id": "component-PageComponent-8f196770333aa216860a88c0b6b221aa",
+            "id": "component-PageComponent-35c1075912def44ad0b1a0e820d9a68b",
             "file": "src/stories/page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -441,16 +460,18 @@
             "outputs": [],
             "providers": [],
             "selector": "storybook-page",
-            "styleUrls": ["./page.css"],
+            "styleUrls": [
+                "./page.css"
+            ],
             "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "template": "<article>        <storybook-header\n            [user]=\"user\"\n            (onLogout)=\"onLogout.emit($event)\"\n            (onLogin)=\"onLogin.emit($event)\"\n            (onCreateAccount)=\"onCreateAccount.emit($event)\"></storybook-header>\n        <section>\n            <h2>Pages in Storybook</h2>\n            <p>\n                We recommend building UIs with a\n                <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    <strong>component-driven</strong>\n                </a>\n                process starting with atomic components and ending with pages.\n            </p>\n            <p>\n                Render pages with mock data. This makes it easy to build and review page states\n                without needing to navigate to them in your app. Here are some handy patterns for\n                managing page data in Storybook:\n            </p>\n            <ul>\n                <li>\n                    Use a higher-level connected component. Storybook helps you compose such data\n                    from the \"args\" of child component stories\n                </li>\n                <li>\n                    Assemble data in the page component from your services. You can mock these\n                    services out using Storybook.\n                </li>\n            </ul>\n            <p>\n                Get a guided tutorial on component-driven development at\n                <a\n                    href=\"https://storybook.js.org/tutorials/\"\n                    target=\"_blank\"\n                    rel=\"noopener noreferrer\">\n                    Storybook tutorials\n                </a>\n                . Read more in the\n                <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    docs\n                </a>\n                .\n            </p>\n            <div class=\"tip-wrapper\">\n                <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n                <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <g fill=\"none\" fillRule=\"evenodd\">\n                        <path\n                            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n                            id=\"a\"\n                            fill=\"#999\" />\n                    </g>\n                </svg>\n                Viewports addon in the toolbar\n            </div>\n        </section>\n    </article>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "user",
                     "defaultValue": "null",
-                    "line": 64,
+                    "line": 67,
                     "type": "unknown"
                 }
             ],
@@ -458,19 +479,19 @@
                 {
                     "name": "onCreateAccount",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 73,
+                    "line": 76,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogin",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 67,
+                    "line": 70,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogout",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 70,
+                    "line": 73,
                     "type": "EventEmitter"
                 }
             ],
@@ -481,11 +502,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n    selector: 'storybook-page',\n    template: `<article>\n        <storybook-header\n            [user]=\"user\"\n            (onLogout)=\"onLogout.emit($event)\"\n            (onLogin)=\"onLogin.emit($event)\"\n            (onCreateAccount)=\"onCreateAccount.emit($event)\"></storybook-header>\n        <section>\n            <h2>Pages in Storybook</h2>\n            <p>\n                We recommend building UIs with a\n                <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    <strong>component-driven</strong>\n                </a>\n                process starting with atomic components and ending with pages.\n            </p>\n            <p>\n                Render pages with mock data. This makes it easy to build and review page states\n                without needing to navigate to them in your app. Here are some handy patterns for\n                managing page data in Storybook:\n            </p>\n            <ul>\n                <li>\n                    Use a higher-level connected component. Storybook helps you compose such data\n                    from the \"args\" of child component stories\n                </li>\n                <li>\n                    Assemble data in the page component from your services. You can mock these\n                    services out using Storybook.\n                </li>\n            </ul>\n            <p>\n                Get a guided tutorial on component-driven development at\n                <a\n                    href=\"https://storybook.js.org/tutorials/\"\n                    target=\"_blank\"\n                    rel=\"noopener noreferrer\">\n                    Storybook tutorials\n                </a>\n                . Read more in the\n                <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    docs\n                </a>\n                .\n            </p>\n            <div class=\"tip-wrapper\">\n                <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n                <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <g fill=\"none\" fillRule=\"evenodd\">\n                        <path\n                            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n                            id=\"a\"\n                            fill=\"#999\" />\n                    </g>\n                </svg>\n                Viewports addon in the toolbar\n            </div>\n        </section>\n    </article>`,\n    styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n    @Input()\n    user: unknown = null;\n\n    @Output()\n    onLogin = new EventEmitter<Event>();\n\n    @Output()\n    onLogout = new EventEmitter<Event>();\n\n    @Output()\n    onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nh2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\np {\n  margin: 1em 0;\n}\n\na {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nli {\n  margin-bottom: 8px;\n}\n\n.tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "data": "section {\n    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n    font-size: 14px;\n    line-height: 24px;\n    padding: 48px 20px;\n    margin: 0 auto;\n    max-width: 600px;\n    color: #333;\n}\n\nh2 {\n    font-weight: 900;\n    font-size: 32px;\n    line-height: 1;\n    margin: 0 0 4px;\n    display: inline-block;\n    vertical-align: top;\n}\n\np {\n    margin: 1em 0;\n}\n\na {\n    text-decoration: none;\n    color: #1ea7fd;\n}\n\nul {\n    padding-left: 30px;\n    margin: 1em 0;\n}\n\nli {\n    margin-bottom: 8px;\n}\n\n.tip {\n    display: inline-block;\n    border-radius: 1em;\n    font-size: 11px;\n    line-height: 12px;\n    font-weight: 700;\n    background: #e7fdd8;\n    color: #66bf3c;\n    padding: 4px 12px;\n    margin-right: 10px;\n    vertical-align: top;\n}\n\n.tip-wrapper {\n    font-size: 13px;\n    line-height: 20px;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 4px;\n    vertical-align: top;\n    margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n    fill: #1ea7fd;\n}\n",
                     "styleUrl": "./page.css"
                 }
             ],
@@ -493,49 +514,53 @@
         },
         {
             "name": "SelectComponent",
-            "id": "component-SelectComponent-8720dbf1626827e36bd1266e7fc27f74",
+            "id": "component-SelectComponent-3da1a661c164989b1bf83a978894876e",
             "file": "projects/basic-component-library/src/lib/select/select.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-select",
-            "styleUrls": ["./select.component.scss"],
+            "selector": "base-select",
+            "styleUrls": [
+                "./select.component.scss"
+            ],
             "styles": [],
-            "templateUrl": ["./select.component.html"],
+            "templateUrl": [
+                "./select.component.html"
+            ],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "control",
-                    "defaultValue": "new FormControl({value: null})",
-                    "line": 25,
+                    "defaultValue": "new FormControl({ value: null })",
+                    "line": 24,
                     "type": "FormControl"
                 },
                 {
                     "name": "disabled",
                     "defaultValue": "false",
-                    "line": 24
+                    "line": 23
                 },
                 {
                     "name": "error",
                     "defaultValue": "''",
-                    "line": 26
+                    "line": 25
                 },
                 {
                     "name": "id",
                     "defaultValue": "''",
-                    "line": 23
+                    "line": 22
                 },
                 {
                     "name": "label",
                     "defaultValue": "''",
-                    "line": 22
+                    "line": 21
                 },
                 {
                     "name": "options",
-                    "defaultValue": "[{\n    value: '',\n    viewValue: ''\n  }]",
-                    "line": 18,
+                    "defaultValue": "[\n        {\n            value: '',\n            viewValue: '',\n        },\n    ]",
+                    "line": 15,
                     "type": "Array<Option>"
                 }
             ],
@@ -553,7 +578,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 27,
                     "jsdoctags": [
                         {
                             "name": "change",
@@ -570,17 +595,19 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n\ntype Option = {\n  value: string;\n  viewValue: string;\n};\n\n\n@Component({\n  selector: 'lib-select',\n  templateUrl: './select.component.html',\n  styleUrls: ['./select.component.scss']\n})\nexport class SelectComponent implements OnChanges {\n\n  @Input() options: Array<Option> = [{\n    value: '',\n    viewValue: ''\n  }];\n  @Input() label = '';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() control = new FormControl({value: null});\n  @Input() error = '';\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\ntype Option = {\n    value: string;\n    viewValue: string;\n};\n\n@Component({\n    selector: 'base-select',\n    templateUrl: './select.component.html',\n    styleUrls: ['./select.component.scss'],\n})\nexport class SelectComponent implements OnChanges {\n    @Input() options: Array<Option> = [\n        {\n            value: '',\n            viewValue: '',\n        },\n    ];\n    @Input() label = '';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() control = new FormControl({ value: null });\n    @Input() error = '';\n\n    ngOnChanges(change: SimpleChanges) {\n        if (change.disabled?.currentValue) {\n            this.control.disable();\n        } else if (change.disabled?.currentValue === false) {\n            this.control.enable();\n        }\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"../../assets/variables\";\n\n.select {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        background-color: $white;\n        border: solid 1px;\n        border-radius: 7px;\n        height: 28px;\n        &:focus {\n            outline: none;\n        }\n    }\n    &__option {\n        &:checked {\n            background-color: $navy-blue;\n            color: $yellow;\n        }\n    }\n}\n.disabled {\n    background-color: $light-gray;\n}\n",
+                    "data": "@import '../../assets/variables';\n\n.select {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        background-color: $white;\n        border: solid 1px;\n        border-radius: 7px;\n        height: 28px;\n        &:focus {\n            outline: none;\n        }\n    }\n    &__option {\n        &:checked {\n            background-color: $navy-blue;\n            color: $yellow;\n        }\n    }\n}\n.disabled {\n    background-color: $light-gray;\n}\n",
                     "styleUrl": "./select.component.scss"
                 }
             ],
             "stylesData": "",
-            "implements": ["OnChanges"],
-            "templateData": "<div class=\"select\">\n    <label [for]=\"id\">{{label}}</label>\n    <select class=\"select__field\" [ngClass]=\"{disabled: disabled}\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">{{ opt.viewValue }}</option>\n    </select>\n    <lib-error [message]=\"error\" [control]=\"control\"></lib-error>\n</div>\n"
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"select\">\n    <label [for]=\"id\">{{ label }}</label>\n    <select class=\"select__field\" [ngClass]=\"{ disabled: disabled }\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">\n            {{ opt.viewValue }}\n        </option>\n    </select>\n    <base-error [message]=\"error\" [control]=\"control\"></base-error>\n</div>\n"
         }
     ],
     "modules": [
@@ -601,7 +628,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "ButtonModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -846,7 +877,7 @@
                 "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "type": "object",
-                "defaultValue": "{\n  production: true\n}"
+                "defaultValue": "{\n    production: true,\n}"
             },
             {
                 "name": "environment",
@@ -854,7 +885,7 @@
                 "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "type": "object",
-                "defaultValue": "{\n  production: false\n}"
+                "defaultValue": "{\n    production: false,\n}"
             },
             {
                 "name": "Error",
@@ -934,7 +965,7 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
                 "type": "[]",
-                "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
+                "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1',\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2',\n    },\n]"
             },
             {
                 "name": "Primary",
@@ -996,7 +1027,7 @@
                 "subtype": "variable",
                 "file": "src/stories/Button.stories.ts",
                 "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Button) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1004,7 +1035,7 @@
                 "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Header) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1012,7 +1043,7 @@
                 "subtype": "variable",
                 "file": "src/stories/Page.stories.ts",
                 "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Page) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1020,7 +1051,7 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/button.stories.ts",
                 "type": "Story<ButtonComponent>",
-                "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
+                "defaultValue": "(args: ButtonComponent) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1028,7 +1059,7 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/input.stories.ts",
                 "type": "Story<InputComponent>",
-                "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
+                "defaultValue": "(args: InputComponent) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1036,7 +1067,7 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
                 "type": "Story<SelectComponent>",
-                "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
+                "defaultValue": "(args: SelectComponent) => ({\n    props: args,\n})"
             }
         ],
         "functions": [],
@@ -1092,7 +1123,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/button.stories.ts",
                     "type": "Story<ButtonComponent>",
-                    "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: ButtonComponent) => ({\n    props: args,\n})"
                 }
             ],
             "src/test.ts": [
@@ -1168,7 +1199,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/input.stories.ts",
                     "type": "Story<InputComponent>",
-                    "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: InputComponent) => ({\n    props: args,\n})"
                 }
             ],
             "projects/basic-component-library/src/stories/select.stories.ts": [
@@ -1202,7 +1233,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/select.stories.ts",
                     "type": "[]",
-                    "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
+                    "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1',\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2',\n    },\n]"
                 },
                 {
                     "name": "Template",
@@ -1210,7 +1241,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/select.stories.ts",
                     "type": "Story<SelectComponent>",
-                    "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: SelectComponent) => ({\n    props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -1220,7 +1251,7 @@
                     "subtype": "variable",
                     "file": "src/environments/environment.prod.ts",
                     "type": "object",
-                    "defaultValue": "{\n  production: true\n}"
+                    "defaultValue": "{\n    production: true,\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -1230,7 +1261,7 @@
                     "subtype": "variable",
                     "file": "src/environments/environment.ts",
                     "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
+                    "defaultValue": "{\n    production: false,\n}"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -1272,7 +1303,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Button.stories.ts",
                     "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Button) => ({\n    props: args,\n})"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -1298,7 +1329,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Header.stories.ts",
                     "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Header) => ({\n    props: args,\n})"
                 }
             ],
             "src/stories/Page.stories.ts": [
@@ -1324,7 +1355,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Page.stories.ts",
                     "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Page) => ({\n    props: args,\n})"
                 }
             ],
             "projects/basic-component-library/src/lib/input/input.module.ts": [
@@ -1374,7 +1405,7 @@
                 "linktype": "component",
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
