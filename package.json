@@ -5,6 +5,7 @@
         "ng": "ng",
         "start": "ng serve",
         "test": "ng test",
+        "test:lib": "npm run test basic-component-library",
         "test-coverage": "ng test --no-watch --code-coverage",
         "lint": "ng lint",
         "e2e": "ng e2e",

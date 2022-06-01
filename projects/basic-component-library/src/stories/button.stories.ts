@@ -1,11 +1,11 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 
-import { ButtonComponent } from '../lib/button/button.component';
+import { BaseButtonComponent } from '../lib/base-button/base-button.component';
 
 export default {
     title: 'Components/Button',
-    component: ButtonComponent,
+    component: BaseButtonComponent,
     decorators: [
         moduleMetadata({
             imports: [],
@@ -13,15 +13,17 @@ export default {
     ],
 } as Meta;
 
-const Template: Story<ButtonComponent> = (args: ButtonComponent) => ({
+const Template: Story<BaseButtonComponent> = (args: BaseButtonComponent) => ({
     props: args,
+    template: `
+        <base-button [type]="type" [id]="id" [action]="action">Ok</base-button>
+    `,
 });
 
 const action = () => alert('clicked');
 
 export const Primary = Template.bind({});
 Primary.args = {
-    text: 'Primary button',
     id: 'primary-button',
     type: 'primary',
     action,
@@ -29,7 +31,6 @@ Primary.args = {
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-    text: 'Secondary button',
     id: 'secondary-button',
     type: 'secondary',
     action,
@@ -37,7 +38,6 @@ Secondary.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-    text: 'Disabled button',
     id: 'disabled-button',
     type: 'primary',
     disabled: true,

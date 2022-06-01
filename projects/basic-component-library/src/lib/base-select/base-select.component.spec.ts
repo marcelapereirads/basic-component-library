@@ -1,20 +1,20 @@
-import { SelectComponent } from './select.component';
+import { BaseSelectComponent } from './base-select.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SimpleChange } from '@angular/core';
 
-describe('SelectComponent', () => {
-    let fixture: ComponentFixture<SelectComponent>;
-    let component: SelectComponent;
+describe('BaseSelectComponent', () => {
+    let fixture: ComponentFixture<BaseSelectComponent>;
+    let component: BaseSelectComponent;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SelectComponent],
+            declarations: [BaseSelectComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SelectComponent);
+        fixture = TestBed.createComponent(BaseSelectComponent);
         component = fixture.componentInstance;
 
         fixture.detectChanges();

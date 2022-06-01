@@ -1,21 +1,21 @@
-import { ButtonComponent } from './button.component';
+import { BaseButtonComponent } from './base-button.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-describe('ButtonComponent', () => {
-    let fixture: ComponentFixture<ButtonComponent>;
-    let component: ButtonComponent;
+describe('BaseButtonComponent', () => {
+    let fixture: ComponentFixture<BaseButtonComponent>;
+    let component: BaseButtonComponent;
 
     const mockAction = () => {};
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ButtonComponent],
+            declarations: [BaseButtonComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ButtonComponent);
+        fixture = TestBed.createComponent(BaseButtonComponent);
         component = fixture.componentInstance;
 
         fixture.detectChanges();

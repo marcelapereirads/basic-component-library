@@ -1,28 +1,19 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-type Option = {
-    value: string;
-    viewValue: string;
-};
-
 @Component({
-    selector: 'base-select',
-    templateUrl: './select.component.html',
-    styleUrls: ['./select.component.scss'],
+    selector: 'base-input',
+    templateUrl: './base-input.component.html',
+    styleUrls: ['./base-input.component.scss'],
 })
-export class SelectComponent implements OnChanges {
-    @Input() options: Array<Option> = [
-        {
-            value: '',
-            viewValue: '',
-        },
-    ];
+export class BaseInputComponent implements OnChanges {
+    @Input() type = 'text';
     @Input() label = '';
-    @Input() id = '';
+    @Input() id = 'input';
     @Input() disabled = false;
+    @Input() mask = '';
+    @Input() errors: Array<string> = [];
     @Input() control = new FormControl({ value: null });
-    @Input() error = '';
 
     ngOnChanges(change: SimpleChanges) {
         if (change.disabled?.currentValue) {

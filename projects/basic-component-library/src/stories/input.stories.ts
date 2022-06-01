@@ -4,20 +4,20 @@ import { moduleMetadata } from '@storybook/angular';
 
 import { NgxMaskModule } from 'ngx-mask';
 
-import { ErrorModule } from '../lib/error/error.module';
-import { InputComponent } from '../lib/input/input.component';
+import { BaseErrorModule } from '../lib/base-error/base-error.module';
+import { BaseInputComponent } from '../lib/base-input/base-input.component';
 
 export default {
     title: 'Components/Input',
-    component: InputComponent,
+    component: BaseInputComponent,
     decorators: [
         moduleMetadata({
-            imports: [NgxMaskModule.forRoot(), FormsModule, ReactiveFormsModule, ErrorModule],
+            imports: [NgxMaskModule.forRoot(), FormsModule, ReactiveFormsModule, BaseErrorModule],
         }),
     ],
 } as Meta;
 
-const Template: Story<InputComponent> = (args: InputComponent) => ({
+const Template: Story<BaseInputComponent> = (args: BaseInputComponent) => ({
     props: args,
 });
 

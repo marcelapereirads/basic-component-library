@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'base-button',
-    templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss'],
+    templateUrl: './base-button.component.html',
+    styleUrls: ['./base-button.component.scss'],
 })
-export class ButtonComponent {
+export class BaseButtonComponent {
     @Input() type: 'primary' | 'secondary' = 'primary';
     @Input() id = '';
     @Input() disabled = false;

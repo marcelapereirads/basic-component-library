@@ -3,20 +3,20 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 
-import { SelectComponent } from '../lib/select/select.component';
-import { ErrorModule } from '../lib/error/error.module';
+import { BaseSelectComponent } from '../lib/base-select/base-select.component';
+import { BaseErrorModule } from '../lib/base-error/base-error.module';
 
 export default {
     title: 'Components/Select',
-    component: SelectComponent,
+    component: BaseSelectComponent,
     decorators: [
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, ErrorModule],
+            imports: [FormsModule, ReactiveFormsModule, BaseErrorModule],
         }),
     ],
 } as Meta;
 
-const Template: Story<SelectComponent> = (args: SelectComponent) => ({
+const Template: Story<BaseSelectComponent> = (args: BaseSelectComponent) => ({
     props: args,
 });
 

@@ -1,21 +1,21 @@
-import { ErrorComponent } from './error.component';
+import { BaseErrorComponent } from './base-error.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-describe('ErrorComponent', () => {
-    let fixture: ComponentFixture<ErrorComponent>;
-    let component: ErrorComponent;
+describe('BaseErrorComponent', () => {
+    let fixture: ComponentFixture<BaseErrorComponent>;
+    let component: BaseErrorComponent;
     const errorMessage = 'The field is required';
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ErrorComponent],
+            declarations: [BaseErrorComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ErrorComponent);
+        fixture = TestBed.createComponent(BaseErrorComponent);
         component = fixture.componentInstance;
 
         fixture.detectChanges();

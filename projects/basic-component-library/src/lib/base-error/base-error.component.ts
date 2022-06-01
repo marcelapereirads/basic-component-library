@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 @Component({
     selector: 'base-error',
-    templateUrl: './error.component.html',
-    styleUrls: ['./error.component.scss'],
+    templateUrl: './base-error.component.html',
+    styleUrls: ['./base-error.component.scss'],
 })
-export class ErrorComponent {
+export class BaseErrorComponent {
     @Input() control = new FormControl({ value: null });
     @Input() message = '';
 }
