@@ -1,12 +1,4 @@
-import {
-  Directive,
-  Input,
-  OnChanges,
-  OnInit,
-  Renderer2,
-  SimpleChanges,
-  ElementRef,
-} from '@angular/core';
+import { Directive, Input, OnChanges, Renderer2, SimpleChanges, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { SequenceGeneratorService } from '../utils/sequence-generator.service';
@@ -17,15 +9,25 @@ import { SequenceGeneratorService } from '../utils/sequence-generator.service';
   // styleUrls: ['./base-input.component.scss'],
 })
 export class BaseInputDirective implements OnChanges {
-  @Input() set label(labelText: string) {
-    if (labelText) {
-      this.createLabelElement(labelText);
+  @Input() set id(id: string) {
+    if (id) {
+      this._id = id;
+      this.renderer.setAttribute(this.elementRef.nativeElement, 'id', id);
+      this.bindInputLabel();
     }
   }
 
-  // @Input() id = 'input';
+  @Input() set label(labelText: string) {
+    if (labelText) {
+      this.createLabelElement(labelText);
+      this.bindInputLabel();
+    }
+  }
+
+  private _id = '';
+  private _labelClass = '';
+
   // @Input() disabled = false;
-  // @Input() mask = '';
   // @Input() errors: Array<string> = [];
   // @Input() control = new FormControl({ value: null });
 
@@ -39,6 +41,10 @@ export class BaseInputDirective implements OnChanges {
     return this.sequenceGeneratorService.sequence;
   }
 
+  get parentNode(): any {
+    return this.renderer.parentNode(this.elementRef.nativeElement);
+  }
+
   ngOnChanges(change: SimpleChanges) {
     // if (change.disabled?.currentValue) {
     //     this.control.disable();
@@ -47,7 +53,7 @@ export class BaseInputDirective implements OnChanges {
     // }
   }
 
-  createElement(parentNode: any, element: string, className: string, children?: any[]): void {
+  createElement(element: string, className: string, children?: any[]): void {
     const labelElement = this.renderer.createElement(element);
 
     /**
@@ -58,18 +64,28 @@ export class BaseInputDirective implements OnChanges {
     /**
      * Includes the element on the node
      */
-    this.renderer.insertBefore(parentNode, labelElement, this.elementRef.nativeElement);
+    this.renderer.insertBefore(this.parentNode, labelElement, this.elementRef.nativeElement);
 
     children?.forEach((element) =>
-      this.renderer.appendChild(parentNode.querySelector(`label.${className}`), element)
+      this.renderer.appendChild(this.parentNode.querySelector(`label.${className}`), element)
     );
   }
 
   createLabelElement(labelText: string): void {
     const className = `base-label${this.sequenceId}`;
     const innerText = this.renderer.createText(labelText);
-    const parentNode = this.renderer.parentNode(this.elementRef.nativeElement);
 
-    this.createElement(parentNode, 'label', className, [innerText]);
+    this._labelClass = className;
+    this.createElement('label', className, [innerText]);
+  }
+
+  bindInputLabel(): void {
+    if (this._id && this._labelClass) {
+      this.renderer.setAttribute(
+        this.parentNode.querySelector(`label.${this._labelClass}`),
+        'for',
+        this._id
+      );
+    }
   }
 }
