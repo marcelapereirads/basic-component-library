@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxMaskModule } from 'ngx-mask';
 
-import { BaseInputComponent } from './base-input.component';
+import { BaseInputDirective } from './base-input.directive';
 import { BaseErrorModule } from '../base-error/base-error.module';
 
 export const ngxMaskModule = NgxMaskModule.forRoot();
 
 @NgModule({
-    declarations: [BaseInputComponent],
-    imports: [CommonModule, ngxMaskModule, FormsModule, ReactiveFormsModule, BaseErrorModule],
-    exports: [BaseInputComponent],
+  declarations: [BaseInputDirective],
+  imports: [CommonModule, ngxMaskModule, FormsModule, ReactiveFormsModule, BaseErrorModule],
+  exports: [BaseInputDirective],
 })
 export class BaseInputModule {}
