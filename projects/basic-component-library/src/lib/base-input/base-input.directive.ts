@@ -1,14 +1,13 @@
-import { Directive, Input, OnChanges, Renderer2, SimpleChanges, ElementRef } from '@angular/core';
+import { Directive, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { COLORS } from '../utils/colors.constant';
 import { SequenceGeneratorService } from '../utils/sequence-generator.service';
 
 @Directive({
   selector: '[base-input]', // TODO: seletor de component
-  // templateUrl: './base-input.component.html',
-  // styleUrls: ['./base-input.component.scss'],
 })
-export class BaseInputDirective implements OnChanges {
+export class BaseInputDirective {
   @Input() set id(id: string) {
     if (id) {
       this._id = id;
@@ -24,10 +23,21 @@ export class BaseInputDirective implements OnChanges {
     }
   }
 
+  @Input() set disable(isDisabled: boolean) {
+    if (isDisabled) {
+      this.backgroundColor = COLORS.disabled;
+      this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', '');
+    } else {
+      this.backgroundColor = 'unset';
+      this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');
+    }
+  }
+
+  @HostBinding('style.background-color') backgroundColor = 'unset';
+
   private _id = '';
   private _labelClass = '';
 
-  // @Input() disabled = false;
   // @Input() errors: Array<string> = [];
   // @Input() control = new FormControl({ value: null });
 
@@ -43,14 +53,6 @@ export class BaseInputDirective implements OnChanges {
 
   get parentNode(): any {
     return this.renderer.parentNode(this.elementRef.nativeElement);
-  }
-
-  ngOnChanges(change: SimpleChanges) {
-    // if (change.disabled?.currentValue) {
-    //     this.control.disable();
-    // } else if (change.disabled?.currentValue === false) {
-    //     this.control.enable();
-    // }
   }
 
   createElement(element: string, className: string, children?: any[]): void {
