@@ -1,10 +1,9 @@
 <div class="input">
-    <label [for]="id">{{ label }}</label>
     <input
         [type]="type"
         [id]="id"
         class="input__field"
         [formControl]="control"
         [ngClass]="{ disabled: disabled }" />
-    <base-error [message]="errors[0]" [control]="control"></base-error>
+    <base-error [message]="errorMessage"></base-error>
 </div>

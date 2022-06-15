@@ -23,6 +23,8 @@ export class BaseInputDirective {
     }
   }
 
+  @Input() set errorMessage(error: string) {}
+
   @Input() set disable(isDisabled: boolean) {
     if (isDisabled) {
       this.backgroundColor = COLORS.disabled;
@@ -37,9 +39,6 @@ export class BaseInputDirective {
 
   private _id = '';
   private _labelClass = '';
-
-  // @Input() errors: Array<string> = [];
-  // @Input() control = new FormControl({ value: null });
 
   constructor(
     private elementRef: ElementRef,
