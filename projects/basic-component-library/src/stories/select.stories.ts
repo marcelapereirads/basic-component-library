@@ -7,51 +7,48 @@ import { BaseSelectComponent } from '../lib/base-select/base-select.component';
 import { BaseErrorModule } from '../lib/base-error/base-error.module';
 
 export default {
-    title: 'Components/Select',
-    component: BaseSelectComponent,
-    decorators: [
-        moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, BaseErrorModule],
-        }),
-    ],
+  title: 'Components/Select',
+  component: BaseSelectComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [FormsModule, ReactiveFormsModule, BaseErrorModule],
+    }),
+  ],
 } as Meta;
 
 const Template: Story<BaseSelectComponent> = (args: BaseSelectComponent) => ({
-    props: args,
+  props: args,
 });
 
 const options = [
-    {
-        value: 'option1',
-        viewValue: 'Option 1',
-    },
-    {
-        value: 'option2',
-        viewValue: 'Option 2',
-    },
+  {
+    value: 'option1',
+    viewValue: 'Option 1',
+  },
+  {
+    value: 'option2',
+    viewValue: 'Option 2',
+  },
 ];
 
 export const Enabled = Template.bind({});
 Enabled.args = {
-    label: 'Select',
-    id: 'enabled-select',
-    options,
-    control: new FormControl(),
+  label: 'Select',
+  id: 'enabled-select',
+  options,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-    label: 'Select',
-    id: 'disabled-select',
-    disabled: true,
-    control: new FormControl(),
+  label: 'Select',
+  id: 'disabled-select',
+  disabled: true,
 };
 
 export const Error = Template.bind({});
 Error.args = {
-    label: 'Select',
-    id: 'error-input',
-    options,
-    error: 'Please fill in the field',
-    control: new FormControl(null, [Validators.required]),
+  label: 'Select',
+  id: 'error-input',
+  options,
+  error: 'Please fill in the field',
 };

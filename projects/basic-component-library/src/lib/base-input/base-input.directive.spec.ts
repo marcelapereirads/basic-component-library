@@ -4,8 +4,7 @@ import { SimpleChange } from '@angular/core';
 
 import { BaseInputDirective } from './base-input.directive';
 
-describe('BaseInputDirective', () => {
-  /////
+xdescribe('BaseInputDirective', () => {
   let fixture: ComponentFixture<BaseInputDirective>;
   let component: BaseInputDirective;
 

@@ -1,7 +1,41 @@
 {
     "pipes": [],
     "interfaces": [],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "SequenceGeneratorService",
+            "id": "injectable-SequenceGeneratorService-2ff0ee9addac58a0b965b43d4f6cdb87",
+            "file": "projects/basic-component-library/src/lib/utils/sequence-generator.service.ts",
+            "properties": [
+                {
+                    "name": "_sequence",
+                    "defaultValue": "1",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        112
+                    ]
+                }
+            ],
+            "methods": [],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class SequenceGeneratorService {\n  private _sequence = 1;\n\n  get sequence(): number {\n    return this._sequence++;\n  }\n}\n",
+            "accessors": {
+                "sequence": {
+                    "name": "sequence",
+                    "getSignature": {
+                        "name": "sequence",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 9
+                    }
+                }
+            },
+            "type": "injectable"
+        }
+    ],
     "classes": [
         {
             "name": "AppPage",
@@ -41,11 +75,313 @@
             "hostListeners": []
         }
     ],
-    "directives": [],
+    "directives": [
+        {
+            "name": "BaseInputDirective",
+            "id": "directive-BaseInputDirective-e8fe572e69d65d4b3fad26b193dadb9a",
+            "file": "projects/basic-component-library/src/lib/base-input/base-input.directive.ts",
+            "type": "directive",
+            "description": "",
+            "sourceCode": "import { Directive, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\nimport { COLORS } from '../utils/colors.constant';\nimport { SequenceGeneratorService } from '../utils/sequence-generator.service';\n\n@Directive({\n  selector: '[base-input]', // TODO: seletor de component\n})\nexport class BaseInputDirective {\n  @Input() set id(id: string) {\n    if (id) {\n      this._id = id;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'id', id);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set label(labelText: string) {\n    if (labelText) {\n      this.createLabelElement(labelText);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set errorMessage(error: string) {}\n\n  @Input() set disable(isDisabled: boolean) {\n    if (isDisabled) {\n      this.backgroundColor = COLORS.disabled;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', '');\n    } else {\n      this.backgroundColor = 'unset';\n      this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');\n    }\n  }\n\n  @HostBinding('style.background-color') backgroundColor = 'unset';\n\n  private _id = '';\n  private _labelClass = '';\n\n  constructor(\n    private elementRef: ElementRef,\n    private renderer: Renderer2,\n    private sequenceGeneratorService: SequenceGeneratorService\n  ) {}\n\n  get sequenceId(): number {\n    return this.sequenceGeneratorService.sequence;\n  }\n\n  get parentNode(): any {\n    return this.renderer.parentNode(this.elementRef.nativeElement);\n  }\n\n  createElement(element: string, className: string, children?: any[]): void {\n    const labelElement = this.renderer.createElement(element);\n\n    /**\n     * Adds the class to the element created\n     */\n    this.renderer.setAttribute(labelElement, 'class', className);\n\n    /**\n     * Includes the element on the node\n     */\n    this.renderer.insertBefore(this.parentNode, labelElement, this.elementRef.nativeElement);\n\n    children?.forEach((element) =>\n      this.renderer.appendChild(this.parentNode.querySelector(`label.${className}`), element)\n    );\n  }\n\n  createLabelElement(labelText: string): void {\n    const className = `base-label${this.sequenceId}`;\n    const innerText = this.renderer.createText(labelText);\n\n    this._labelClass = className;\n    this.createElement('label', className, [innerText]);\n  }\n\n  bindInputLabel(): void {\n    if (this._id && this._labelClass) {\n      this.renderer.setAttribute(\n        this.parentNode.querySelector(`label.${this._labelClass}`),\n        'for',\n        this._id\n      );\n    }\n  }\n}\n",
+            "selector": "[base-input]",
+            "providers": [],
+            "inputsClass": [
+                {
+                    "name": "disable",
+                    "line": 28,
+                    "type": "boolean"
+                },
+                {
+                    "name": "errorMessage",
+                    "line": 26,
+                    "type": "string"
+                },
+                {
+                    "name": "id",
+                    "line": 11,
+                    "type": "string"
+                },
+                {
+                    "name": "label",
+                    "line": 19,
+                    "type": "string"
+                }
+            ],
+            "outputsClass": [],
+            "hostBindings": [
+                {
+                    "name": "style.background-color",
+                    "defaultValue": "'unset'",
+                    "line": 38
+                }
+            ],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "_id",
+                    "defaultValue": "''",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 40,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "_labelClass",
+                    "defaultValue": "''",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 41,
+                    "modifierKind": [
+                        112
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "bindInputLabel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 83
+                },
+                {
+                    "name": "createElement",
+                    "args": [
+                        {
+                            "name": "element",
+                            "type": "string"
+                        },
+                        {
+                            "name": "className",
+                            "type": "string"
+                        },
+                        {
+                            "name": "children",
+                            "type": "any[]",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 57,
+                    "jsdoctags": [
+                        {
+                            "name": "element",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "className",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "children",
+                            "type": "any[]",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "createLabelElement",
+                    "args": [
+                        {
+                            "name": "labelText",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "jsdoctags": [
+                        {
+                            "name": "labelText",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef"
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2"
+                    },
+                    {
+                        "name": "sequenceGeneratorService",
+                        "type": "SequenceGeneratorService"
+                    }
+                ],
+                "line": 41,
+                "jsdoctags": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "sequenceGeneratorService",
+                        "type": "SequenceGeneratorService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "id": {
+                    "name": "id",
+                    "setSignature": {
+                        "name": "id",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "id",
+                                "type": "string"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 11,
+                        "jsdoctags": [
+                            {
+                                "name": "id",
+                                "type": "string",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "label": {
+                    "name": "label",
+                    "setSignature": {
+                        "name": "label",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "labelText",
+                                "type": "string"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 19,
+                        "jsdoctags": [
+                            {
+                                "name": "labelText",
+                                "type": "string",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "errorMessage": {
+                    "name": "errorMessage",
+                    "setSignature": {
+                        "name": "errorMessage",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "error",
+                                "type": "string"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 26,
+                        "jsdoctags": [
+                            {
+                                "name": "error",
+                                "type": "string",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "disable": {
+                    "name": "disable",
+                    "setSignature": {
+                        "name": "disable",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "isDisabled",
+                                "type": "boolean"
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 28,
+                        "jsdoctags": [
+                            {
+                                "name": "isDisabled",
+                                "type": "boolean",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "sequenceId": {
+                    "name": "sequenceId",
+                    "getSignature": {
+                        "name": "sequenceId",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 49
+                    }
+                },
+                "parentNode": {
+                    "name": "parentNode",
+                    "getSignature": {
+                        "name": "parentNode",
+                        "type": "any",
+                        "returnType": "any",
+                        "line": 53
+                    }
+                }
+            }
+        }
+    ],
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-dceca1fb595c584c63aae4f31ace4f10",
+            "id": "component-AppComponent-d06b1401bf539c90c0d8b672542af2a2",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -63,12 +399,27 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "form",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ]",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
                     "name": "title",
                     "defaultValue": "'components-library'",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 8
+                    "line": 9
                 }
             ],
             "methodsClass": [],
@@ -77,11 +428,31 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-root',\n    templateUrl: './app.component.html',\n})\nexport class AppComponent {\n    title = 'components-library';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n})\nexport class AppComponent {\n  title = 'components-library';\n  form: any; ///\n\n  options = [\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ];\n\n  constructor(private formBuilder: FormBuilder) {\n    //tirar construtor\n    this.form = formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n<base-button>testo</base-button>"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder"
+                    }
+                ],
+                "line": 26,
+                "jsdoctags": [
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<label> aaa </label>\n<form [formGroup]=\"form\">\n    <input base-input [label]=\"'teste'\" id=\"oi\" [disable]=\"true\" formControlName=\"username\" />\n    <input base-input [label]=\"'x'\" [id]=\"'id2'\" formControlName=\"password\" />\n    <br/>\n    <label> aaa </label>\n    \n    control {{form.get('password').errors | json}}\n    \n    <base-error message=\"Teste errir\"></base-error>\n    \n    <base-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [error]=\"'error'\"\n    >\n    </base-select>\n</form>\n"
         },
         {
             "name": "BaseButtonComponent",
@@ -238,7 +609,7 @@
         },
         {
             "name": "BaseErrorComponent",
-            "id": "component-BaseErrorComponent-4daf562cd4e9f2c15b640985a427f324",
+            "id": "component-BaseErrorComponent-e0d27ca2c8acc759f5b1e7ec9405e144",
             "file": "projects/basic-component-library/src/lib/base-error/base-error.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -256,15 +627,9 @@
             "viewProviders": [],
             "inputsClass": [
                 {
-                    "name": "control",
-                    "defaultValue": "new FormControl({ value: null })",
-                    "line": 9,
-                    "type": "FormControl"
-                },
-                {
                     "name": "message",
                     "defaultValue": "''",
-                    "line": 10
+                    "line": 9
                 }
             ],
             "outputsClass": [],
@@ -275,7 +640,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n@Component({\n    selector: 'base-error',\n    templateUrl: './base-error.component.html',\n    styleUrls: ['./base-error.component.scss'],\n})\nexport class BaseErrorComponent {\n    @Input() control = new FormControl({ value: null });\n    @Input() message = '';\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n@Component({\n  selector: 'base-error',\n  templateUrl: './base-error.component.html',\n  styleUrls: ['./base-error.component.scss'],\n})\nexport class BaseErrorComponent {\n  @Input() message = '';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -284,109 +649,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <div class=\"error__icon\"></div>\n    <span class=\"error__message\">{{ message }}</span>\n</div>\n"
-        },
-        {
-            "name": "BaseInputComponent",
-            "id": "component-BaseInputComponent-958784d27ef91c83555b235736196925",
-            "file": "projects/basic-component-library/src/lib/base-input/base-input.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "base-input",
-            "styleUrls": [
-                "./base-input.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./base-input.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "control",
-                    "defaultValue": "new FormControl({ value: null })",
-                    "line": 16,
-                    "type": "FormControl"
-                },
-                {
-                    "name": "disabled",
-                    "defaultValue": "false",
-                    "line": 13
-                },
-                {
-                    "name": "errors",
-                    "defaultValue": "[]",
-                    "line": 15,
-                    "type": "Array<string>"
-                },
-                {
-                    "name": "id",
-                    "defaultValue": "'input'",
-                    "line": 12
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "''",
-                    "line": 11
-                },
-                {
-                    "name": "mask",
-                    "defaultValue": "''",
-                    "line": 14
-                },
-                {
-                    "name": "type",
-                    "defaultValue": "'text'",
-                    "line": 10
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnChanges",
-                    "args": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges"
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 18,
-                    "jsdoctags": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n    selector: 'base-input',\n    templateUrl: './base-input.component.html',\n    styleUrls: ['./base-input.component.scss'],\n})\nexport class BaseInputComponent implements OnChanges {\n    @Input() type = 'text';\n    @Input() label = '';\n    @Input() id = 'input';\n    @Input() disabled = false;\n    @Input() mask = '';\n    @Input() errors: Array<string> = [];\n    @Input() control = new FormControl({ value: null });\n\n    ngOnChanges(change: SimpleChanges) {\n        if (change.disabled?.currentValue) {\n            this.control.disable();\n        } else if (change.disabled?.currentValue === false) {\n            this.control.enable();\n        }\n    }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "@import '../../assets/variables';\n\n.input {\n    display: flex;\n    flex-direction: column;\n\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
-                    "styleUrl": "./base-input.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnChanges"
-            ],
-            "templateData": "<div class=\"input\">\n    <label [for]=\"id\">{{ label }}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{ disabled: disabled }\" />\n    <base-error [message]=\"errors[0]\" [control]=\"control\"></base-error>\n</div>\n"
+            "templateData": "<div *ngIf=\"message\" class=\"error d-flex\">\n    <div class=\"error__icon\"></div>\n    <span class=\"error__message\">{{ message }}</span>\n</div>\n"
         },
         {
             "name": "BaseSelectComponent",
@@ -483,7 +746,7 @@
             "implements": [
                 "OnChanges"
             ],
-            "templateData": "<div class=\"select\">\n    <label [for]=\"id\">{{ label }}</label>\n    <select class=\"select__field\" [ngClass]=\"{ disabled: disabled }\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">\n            {{ opt.viewValue }}\n        </option>\n    </select>\n    <base-error [message]=\"error\" [control]=\"control\"></base-error>\n</div>\n"
+            "templateData": "<div class=\"select\">\n    <label [for]=\"id\">{{ label }}</label>\n    <select class=\"select__field\" [ngClass]=\"{ disabled: disabled }\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">\n            {{ opt.viewValue }}\n        </option>\n    </select>\n    <base-error [message]=\"error\"></base-error>\n</div>\n"
         },
         {
             "name": "HeaderComponent",
@@ -630,7 +893,13 @@
                     "type": "imports",
                     "elements": [
                         {
-                            "name": "BaseButtonModule"
+                            "name": "BaseErrorModule"
+                        },
+                        {
+                            "name": "BaseInputModule"
+                        },
+                        {
+                            "name": "BaseSelectModule"
                         }
                     ]
                 },
@@ -733,7 +1002,7 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "BaseInputComponent"
+                            "name": "BaseInputDirective"
                         }
                     ]
                 },
@@ -749,7 +1018,7 @@
                     "type": "exports",
                     "elements": [
                         {
-                            "name": "BaseInputComponent"
+                            "name": "BaseInputDirective"
                         }
                     ]
                 },
@@ -816,6 +1085,14 @@
                 "defaultValue": "() => alert('clicked')"
             },
             {
+                "name": "COLORS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                "type": "object",
+                "defaultValue": "{\n  disabled: '#d9d9d9',\n}"
+            },
+            {
                 "name": "context",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -843,23 +1120,7 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Enabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/basic-component-library/src/stories/input.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -886,14 +1147,6 @@
                 "file": "src/environments/environment.ts",
                 "type": "object",
                 "defaultValue": "{\n    production: false,\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Error",
@@ -944,28 +1197,12 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Masked",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "ngxMaskModule",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/basic-component-library/src/lib/base-input/base-input.module.ts",
-                "type": "",
-                "defaultValue": "NgxMaskModule.forRoot()"
-            },
-            {
                 "name": "options",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
                 "type": "[]",
-                "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1',\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2',\n    },\n]"
+                "defaultValue": "[\n  {\n    value: 'option1',\n    viewValue: 'Option 1',\n  },\n  {\n    value: 'option2',\n    viewValue: 'Option 2',\n  },\n]"
             },
             {
                 "name": "Primary",
@@ -1057,17 +1294,9 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "Story<BaseInputComponent>",
-                "defaultValue": "(args: BaseInputComponent) => ({\n    props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
                 "type": "Story<BaseSelectComponent>",
-                "defaultValue": "(args: BaseSelectComponent) => ({\n    props: args,\n})"
+                "defaultValue": "(args: BaseSelectComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -1126,6 +1355,16 @@
                     "defaultValue": "(args: BaseButtonComponent) => ({\n    props: args,\n    template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
                 }
             ],
+            "projects/basic-component-library/src/lib/utils/colors.constant.ts": [
+                {
+                    "name": "COLORS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  disabled: '#d9d9d9',\n}"
+                }
+            ],
             "src/test.ts": [
                 {
                     "name": "context",
@@ -1160,48 +1399,6 @@
                     "type": "literal type"
                 }
             ],
-            "projects/basic-component-library/src/stories/input.stories.ts": [
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Enabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Error",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Masked",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
-                    "type": "Story<BaseInputComponent>",
-                    "defaultValue": "(args: BaseInputComponent) => ({\n    props: args,\n})"
-                }
-            ],
             "projects/basic-component-library/src/stories/select.stories.ts": [
                 {
                     "name": "Disabled",
@@ -1233,7 +1430,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/select.stories.ts",
                     "type": "[]",
-                    "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1',\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2',\n    },\n]"
+                    "defaultValue": "[\n  {\n    value: 'option1',\n    viewValue: 'Option 1',\n  },\n  {\n    value: 'option2',\n    viewValue: 'Option 2',\n  },\n]"
                 },
                 {
                     "name": "Template",
@@ -1241,7 +1438,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/select.stories.ts",
                     "type": "Story<BaseSelectComponent>",
-                    "defaultValue": "(args: BaseSelectComponent) => ({\n    props: args,\n})"
+                    "defaultValue": "(args: BaseSelectComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -1357,16 +1554,6 @@
                     "type": "Story<Page>",
                     "defaultValue": "(args: Page) => ({\n    props: args,\n})"
                 }
-            ],
-            "projects/basic-component-library/src/lib/base-input/base-input.module.ts": [
-                {
-                    "name": "ngxMaskModule",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/basic-component-library/src/lib/base-input/base-input.module.ts",
-                    "type": "",
-                    "defaultValue": "NgxMaskModule.forRoot()"
-                }
             ]
         },
         "groupedFunctions": {},
@@ -1387,7 +1574,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 1,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -1414,26 +1601,16 @@
                 "linktype": "component",
                 "name": "BaseErrorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
-                "filePath": "projects/basic-component-library/src/lib/base-input/base-input.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "BaseInputComponent",
+                "filePath": "projects/basic-component-library/src/lib/base-input/base-input.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "BaseInputDirective",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/lib/base-input/base-input.module.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ngxMaskModule",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -1443,6 +1620,25 @@
                 "name": "BaseSelectComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "COLORS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-library/src/lib/utils/sequence-generator.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "SequenceGeneratorService",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -1487,56 +1683,6 @@
             },
             {
                 "filePath": "projects/basic-component-library/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Enabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Error",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Masked",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -1621,7 +1767,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
