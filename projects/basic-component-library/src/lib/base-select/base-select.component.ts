@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 type Option = {
     value: string;
@@ -21,7 +21,7 @@ export class BaseSelectComponent implements OnChanges {
     @Input() label = '';
     @Input() id = '';
     @Input() disabled = false;
-    @Input() control = new FormControl({ value: null });
+    @Input() control = new UntypedFormControl({ value: null });
     @Input() error = '';
 
     ngOnChanges(change: SimpleChanges) {

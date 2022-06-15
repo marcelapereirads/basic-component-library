@@ -381,7 +381,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-d06b1401bf539c90c0d8b672542af2a2",
+            "id": "component-AppComponent-10a4f4dd90907e7845ffdd2d06f12721",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -422,13 +422,22 @@
                     "line": 9
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "action",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36
+                }
+            ],
             "hostBindings": [],
             "hostListeners": [],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n})\nexport class AppComponent {\n  title = 'components-library';\n  form: any; ///\n\n  options = [\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ];\n\n  constructor(private formBuilder: FormBuilder) {\n    //tirar construtor\n    this.form = formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n})\nexport class AppComponent {\n  title = 'components-library';\n  form: any; ///\n\n  options = [\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ];\n\n  constructor(private formBuilder: FormBuilder) {\n    //tirar construtor\n    this.form = formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n  }\n\n  action() {\n    ///\n    alert('clicked');\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -452,7 +461,7 @@
                     }
                 ]
             },
-            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<label> aaa </label>\n<form [formGroup]=\"form\">\n    <input base-input [label]=\"'teste'\" id=\"oi\" [disable]=\"true\" formControlName=\"username\" />\n    <input base-input [label]=\"'x'\" [id]=\"'id2'\" formControlName=\"password\" />\n    <br/>\n    <label> aaa </label>\n    \n    control {{form.get('password').errors | json}}\n    \n    <base-error message=\"Teste errir\"></base-error>\n    \n    <base-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [error]=\"'error'\"\n    >\n    </base-select>\n</form>\n"
+            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<label> aaa </label>\n<form [formGroup]=\"form\">\n    <input base-input [label]=\"'teste'\" id=\"oi\" [disable]=\"true\" formControlName=\"username\" />\n    <input base-input [label]=\"'x'\" [id]=\"'id2'\" formControlName=\"password\" />\n    <br/>\n    <label> aaa </label>\n    \n    control {{form.get('password').errors | json}}\n    \n    <base-error message=\"Teste errir\"></base-error>\n    \n    <base-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [error]=\"'error'\"\n        [disabled]=\"true\"\n    >\n    </base-select>\n\n    <base-button>Hello</base-button>\n</form>\n"
         },
         {
             "name": "BaseButtonComponent",
@@ -537,7 +546,7 @@
         },
         {
             "name": "BaseButtonComponent",
-            "id": "component-BaseButtonComponent-33ebcd9e1e5cf89e779054068a0228b9-1",
+            "id": "component-BaseButtonComponent-98c4109d3f0259eca5f8c3a5772ba478-1",
             "file": "projects/basic-component-library/src/lib/base-button/base-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -556,7 +565,7 @@
             "inputsClass": [
                 {
                     "name": "action",
-                    "defaultValue": "() => {}",
+                    "defaultValue": "() => alert('clicked')",
                     "line": 12
                 },
                 {
@@ -593,7 +602,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n    selector: 'base-button',\n    templateUrl: './base-button.component.html',\n    styleUrls: ['./base-button.component.scss'],\n})\nexport class BaseButtonComponent {\n    @Input() type: 'primary' | 'secondary' = 'primary';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() action = () => {};\n\n    handleClick() {\n        if (!this.disabled) {\n            this.action();\n        }\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'base-button',\n  templateUrl: './base-button.component.html',\n  styleUrls: ['./base-button.component.scss'],\n})\nexport class BaseButtonComponent {\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() action = () => alert('clicked'); ///\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -653,7 +662,7 @@
         },
         {
             "name": "BaseSelectComponent",
-            "id": "component-BaseSelectComponent-fb3b945c7b4ab1b37f8590e2556a34f0",
+            "id": "component-BaseSelectComponent-8cebfdc3af1323664b455f6ebd9ca1c4",
             "file": "projects/basic-component-library/src/lib/base-select/base-select.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -672,9 +681,9 @@
             "inputsClass": [
                 {
                     "name": "control",
-                    "defaultValue": "new FormControl({ value: null })",
+                    "defaultValue": "new UntypedFormControl({ value: null })",
                     "line": 24,
-                    "type": "FormControl"
+                    "type": "UntypedFormControl"
                 },
                 {
                     "name": "disabled",
@@ -734,7 +743,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\ntype Option = {\n    value: string;\n    viewValue: string;\n};\n\n@Component({\n    selector: 'base-select',\n    templateUrl: './base-select.component.html',\n    styleUrls: ['./base-select.component.scss'],\n})\nexport class BaseSelectComponent implements OnChanges {\n    @Input() options: Array<Option> = [\n        {\n            value: '',\n            viewValue: '',\n        },\n    ];\n    @Input() label = '';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() control = new FormControl({ value: null });\n    @Input() error = '';\n\n    ngOnChanges(change: SimpleChanges) {\n        if (change.disabled?.currentValue) {\n            this.control.disable();\n        } else if (change.disabled?.currentValue === false) {\n            this.control.enable();\n        }\n    }\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { UntypedFormControl } from '@angular/forms';\n\ntype Option = {\n    value: string;\n    viewValue: string;\n};\n\n@Component({\n    selector: 'base-select',\n    templateUrl: './base-select.component.html',\n    styleUrls: ['./base-select.component.scss'],\n})\nexport class BaseSelectComponent implements OnChanges {\n    @Input() options: Array<Option> = [\n        {\n            value: '',\n            viewValue: '',\n        },\n    ];\n    @Input() label = '';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() control = new UntypedFormControl({ value: null });\n    @Input() error = '';\n\n    ngOnChanges(change: SimpleChanges) {\n        if (change.disabled?.currentValue) {\n            this.control.disable();\n        } else if (change.disabled?.currentValue === false) {\n            this.control.enable();\n        }\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -892,6 +901,9 @@
                 {
                     "type": "imports",
                     "elements": [
+                        {
+                            "name": "BaseButtonModule"
+                        },
                         {
                             "name": "BaseErrorModule"
                         },
@@ -1288,7 +1300,7 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/button.stories.ts",
                 "type": "Story<BaseButtonComponent>",
-                "defaultValue": "(args: BaseButtonComponent) => ({\n    props: args,\n    template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
+                "defaultValue": "(args: BaseButtonComponent) => ({\n  props: args,\n  template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
             },
             {
                 "name": "Template",
@@ -1352,7 +1364,7 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/button.stories.ts",
                     "type": "Story<BaseButtonComponent>",
-                    "defaultValue": "(args: BaseButtonComponent) => ({\n    props: args,\n    template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
+                    "defaultValue": "(args: BaseButtonComponent) => ({\n  props: args,\n  template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
                 }
             ],
             "projects/basic-component-library/src/lib/utils/colors.constant.ts": [
@@ -1767,7 +1779,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
