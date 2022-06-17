@@ -1,13 +1,24 @@
-import { Directive, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  Directive,
+  Input,
+  Renderer2,
+  ElementRef,
+  HostBinding,
+  ViewContainerRef,
+} from '@angular/core';
 
-import { COLORS } from '../utils/colors.constant';
+import { BaseErrorComponent } from '../base-error/base-error.component';
+import { BASE_INPUT_STYLE } from './base-input.style';
+import { COLORS } from '../theme/colors.constant';
 import { SequenceGeneratorService } from '../utils/sequence-generator.service';
 
 @Directive({
   selector: '[base-input]', // TODO: seletor de component
 })
 export class BaseInputDirective {
+  @HostBinding('style.background-color') backgroundColor = 'unset';
+  @HostBinding('style') style = BASE_INPUT_STYLE;
+
   @Input() set id(id: string) {
     if (id) {
       this._id = id;
@@ -23,7 +34,11 @@ export class BaseInputDirective {
     }
   }
 
-  @Input() set errorMessage(error: string) {}
+  @Input() set errorMessage(error: string) {
+    const errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});
+
+    errorComponent.instance.message = error;
+  }
 
   @Input() set disable(isDisabled: boolean) {
     if (isDisabled) {
@@ -35,14 +50,13 @@ export class BaseInputDirective {
     }
   }
 
-  @HostBinding('style.background-color') backgroundColor = 'unset';
-
   private _id = '';
   private _labelClass = '';
 
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
+    private viewContainerRef: ViewContainerRef,
     private sequenceGeneratorService: SequenceGeneratorService
   ) {}
 
