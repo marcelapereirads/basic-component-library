@@ -8,16 +8,17 @@ import {
 } from '@angular/core';
 
 import { BaseErrorComponent } from '../base-error/base-error.component';
+import { SequenceGeneratorService } from '../utils/sequence-generator.service';
 import { BASE_INPUT_STYLE } from './base-input.style';
 import { COLORS } from '../theme/colors.constant';
-import { SequenceGeneratorService } from '../utils/sequence-generator.service';
 
 @Directive({
   selector: '[base-input]', // TODO: seletor de component
 })
 export class BaseInputDirective {
-  @HostBinding('style.background-color') backgroundColor = 'unset';
   @HostBinding('style') style = BASE_INPUT_STYLE;
+  @HostBinding('style.background-color') backgroundColor = 'unset';
+  @HostBinding('style.border-color') borderColor = COLORS.darkGrey;
 
   @Input() set id(id: string) {
     if (id) {
@@ -35,9 +36,14 @@ export class BaseInputDirective {
   }
 
   @Input() set errorMessage(error: string) {
-    const errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});
+    if (error) {
+      const errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});
 
-    errorComponent.instance.message = error;
+      errorComponent.instance.message = error;
+      this.borderColor = COLORS.error;
+    } else {
+      this.borderColor = COLORS.darkGrey;
+    }
   }
 
   @Input() set disable(isDisabled: boolean) {
@@ -68,6 +74,10 @@ export class BaseInputDirective {
     return this.renderer.parentNode(this.elementRef.nativeElement);
   }
 
+  get labelElement(): any {
+    return this.parentNode.querySelector(`label.${this._labelClass}`);
+  }
+
   createElement(element: string, className: string, children?: any[]): void {
     const labelElement = this.renderer.createElement(element);
 
@@ -92,15 +102,13 @@ export class BaseInputDirective {
 
     this._labelClass = className;
     this.createElement('label', className, [innerText]);
+
+    this.renderer.setAttribute(this.labelElement, 'style', `color: ${COLORS.darkGrey}`);
   }
 
   bindInputLabel(): void {
     if (this._id && this._labelClass) {
-      this.renderer.setAttribute(
-        this.parentNode.querySelector(`label.${this._labelClass}`),
-        'for',
-        this._id
-      );
+      this.renderer.setAttribute(this.labelElement, 'for', this._id);
     }
   }
 }
