@@ -78,41 +78,51 @@
     "directives": [
         {
             "name": "BaseInputDirective",
-            "id": "directive-BaseInputDirective-e8fe572e69d65d4b3fad26b193dadb9a",
+            "id": "directive-BaseInputDirective-86f656242c6c760fe1a996fbf1ae11d2",
             "file": "projects/basic-component-library/src/lib/base-input/base-input.directive.ts",
             "type": "directive",
             "description": "",
-            "sourceCode": "import { Directive, Input, Renderer2, ElementRef, HostBinding } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\nimport { COLORS } from '../utils/colors.constant';\nimport { SequenceGeneratorService } from '../utils/sequence-generator.service';\n\n@Directive({\n  selector: '[base-input]', // TODO: seletor de component\n})\nexport class BaseInputDirective {\n  @Input() set id(id: string) {\n    if (id) {\n      this._id = id;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'id', id);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set label(labelText: string) {\n    if (labelText) {\n      this.createLabelElement(labelText);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set errorMessage(error: string) {}\n\n  @Input() set disable(isDisabled: boolean) {\n    if (isDisabled) {\n      this.backgroundColor = COLORS.disabled;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', '');\n    } else {\n      this.backgroundColor = 'unset';\n      this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');\n    }\n  }\n\n  @HostBinding('style.background-color') backgroundColor = 'unset';\n\n  private _id = '';\n  private _labelClass = '';\n\n  constructor(\n    private elementRef: ElementRef,\n    private renderer: Renderer2,\n    private sequenceGeneratorService: SequenceGeneratorService\n  ) {}\n\n  get sequenceId(): number {\n    return this.sequenceGeneratorService.sequence;\n  }\n\n  get parentNode(): any {\n    return this.renderer.parentNode(this.elementRef.nativeElement);\n  }\n\n  createElement(element: string, className: string, children?: any[]): void {\n    const labelElement = this.renderer.createElement(element);\n\n    /**\n     * Adds the class to the element created\n     */\n    this.renderer.setAttribute(labelElement, 'class', className);\n\n    /**\n     * Includes the element on the node\n     */\n    this.renderer.insertBefore(this.parentNode, labelElement, this.elementRef.nativeElement);\n\n    children?.forEach((element) =>\n      this.renderer.appendChild(this.parentNode.querySelector(`label.${className}`), element)\n    );\n  }\n\n  createLabelElement(labelText: string): void {\n    const className = `base-label${this.sequenceId}`;\n    const innerText = this.renderer.createText(labelText);\n\n    this._labelClass = className;\n    this.createElement('label', className, [innerText]);\n  }\n\n  bindInputLabel(): void {\n    if (this._id && this._labelClass) {\n      this.renderer.setAttribute(\n        this.parentNode.querySelector(`label.${this._labelClass}`),\n        'for',\n        this._id\n      );\n    }\n  }\n}\n",
+            "sourceCode": "import {\n  Directive,\n  Input,\n  Renderer2,\n  ElementRef,\n  HostBinding,\n  ViewContainerRef,\n  ComponentRef,\n} from '@angular/core';\n\nimport { BaseErrorComponent } from '../base-error/base-error.component';\nimport { SequenceGeneratorService } from '../utils/sequence-generator.service';\nimport { BASE_INPUT_STYLE } from './base-input.style';\nimport { COLORS } from '../theme/colors.constant';\n\n@Directive({\n  selector: '[base-input]',\n})\nexport class BaseInputDirective {\n  @HostBinding('style') style = BASE_INPUT_STYLE;\n  @HostBinding('style.background-color') backgroundColor = 'unset';\n  @HostBinding('style.border-color') borderColor = COLORS.darkGrey;\n\n  @Input() set id(id: string) {\n    if (id) {\n      this._id = id;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'id', id);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set label(labelText: string) {\n    if (labelText) {\n      this.createLabelElement(labelText);\n      this.bindInputLabel();\n    }\n  }\n\n  @Input() set errorMessage(error: string) {\n    if (error) {\n      this.borderColor = COLORS.error;\n\n      this.errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});\n      this.errorComponent.instance.message = error;\n    } else {\n      this.borderColor = COLORS.darkGrey;\n\n      if (this.errorComponent) {\n        this.errorComponent.destroy();\n      }\n    }\n  }\n\n  @Input() set disable(isDisabled: boolean) {\n    if (isDisabled) {\n      this.backgroundColor = COLORS.disabled;\n      this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', '');\n    } else {\n      this.backgroundColor = 'unset';\n      this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');\n    }\n  }\n\n  private _id = '';\n  private labelClass = '';\n  private errorComponent: ComponentRef<BaseErrorComponent> | undefined;\n\n  constructor(\n    private elementRef: ElementRef,\n    private renderer: Renderer2,\n    private viewContainerRef: ViewContainerRef,\n    private sequenceGeneratorService: SequenceGeneratorService\n  ) {}\n\n  get sequenceId(): number {\n    return this.sequenceGeneratorService.sequence;\n  }\n\n  get parentNode(): any {\n    return this.renderer.parentNode(this.elementRef.nativeElement);\n  }\n\n  get labelElement(): any {\n    return this.parentNode.querySelector(`label.${this.labelClass}`);\n  }\n\n  createElement(element: string, className: string, children?: any[]): void {\n    const labelElement = this.renderer.createElement(element);\n\n    /**\n     * Adds the class to the element created\n     */\n    this.renderer.setAttribute(labelElement, 'class', className);\n\n    /**\n     * Includes the element on the node\n     */\n    this.renderer.insertBefore(this.parentNode, labelElement, this.elementRef.nativeElement);\n\n    children?.forEach((element) =>\n      this.renderer.appendChild(this.parentNode.querySelector(`label.${className}`), element)\n    );\n  }\n\n  createLabelElement(labelText: string): void {\n    const className = `base-label${this.sequenceId}`;\n    const innerText = this.renderer.createText(labelText);\n\n    this.labelClass = className;\n    this.createElement('label', className, [innerText]);\n\n    this.renderer.setAttribute(this.labelElement, 'style', `color: ${COLORS.darkGrey}`);\n  }\n\n  bindInputLabel(): void {\n    if (this._id && this.labelClass) {\n      this.renderer.setAttribute(this.labelElement, 'for', this._id);\n    }\n  }\n}\n",
             "selector": "[base-input]",
             "providers": [],
             "inputsClass": [
                 {
                     "name": "disable",
-                    "line": 28,
+                    "line": 54,
                     "type": "boolean"
                 },
                 {
                     "name": "errorMessage",
-                    "line": 26,
+                    "line": 39,
                     "type": "string"
                 },
                 {
                     "name": "id",
-                    "line": 11,
+                    "line": 24,
                     "type": "string"
                 },
                 {
                     "name": "label",
-                    "line": 19,
+                    "line": 32,
                     "type": "string"
                 }
             ],
             "outputsClass": [],
             "hostBindings": [
                 {
+                    "name": "style",
+                    "defaultValue": "BASE_INPUT_STYLE",
+                    "line": 20
+                },
+                {
                     "name": "style.background-color",
                     "defaultValue": "'unset'",
-                    "line": 38
+                    "line": 21
+                },
+                {
+                    "name": "style.border-color",
+                    "defaultValue": "COLORS.darkGrey",
+                    "line": 22
                 }
             ],
             "hostListeners": [],
@@ -123,18 +133,28 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 40,
+                    "line": 64,
                     "modifierKind": [
                         112
                     ]
                 },
                 {
-                    "name": "_labelClass",
+                    "name": "errorComponent",
+                    "type": "ComponentRef<BaseErrorComponent> | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 66,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "labelClass",
                     "defaultValue": "''",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 65,
                     "modifierKind": [
                         112
                     ]
@@ -147,7 +167,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83
+                    "line": 115
                 },
                 {
                     "name": "createElement",
@@ -169,7 +189,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 87,
                     "jsdoctags": [
                         {
                             "name": "element",
@@ -206,7 +226,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 75,
+                    "line": 105,
                     "jsdoctags": [
                         {
                             "name": "labelText",
@@ -231,11 +251,15 @@
                         "type": "Renderer2"
                     },
                     {
+                        "name": "viewContainerRef",
+                        "type": "ViewContainerRef"
+                    },
+                    {
                         "name": "sequenceGeneratorService",
                         "type": "SequenceGeneratorService"
                     }
                 ],
-                "line": 41,
+                "line": 66,
                 "jsdoctags": [
                     {
                         "name": "elementRef",
@@ -247,6 +271,13 @@
                     {
                         "name": "renderer",
                         "type": "Renderer2",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "viewContainerRef",
+                        "type": "ViewContainerRef",
                         "tagName": {
                             "text": "param"
                         }
@@ -273,7 +304,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 11,
+                        "line": 24,
                         "jsdoctags": [
                             {
                                 "name": "id",
@@ -297,7 +328,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 19,
+                        "line": 32,
                         "jsdoctags": [
                             {
                                 "name": "labelText",
@@ -321,7 +352,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 26,
+                        "line": 39,
                         "jsdoctags": [
                             {
                                 "name": "error",
@@ -345,7 +376,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 28,
+                        "line": 54,
                         "jsdoctags": [
                             {
                                 "name": "isDisabled",
@@ -363,7 +394,7 @@
                         "name": "sequenceId",
                         "type": "number",
                         "returnType": "number",
-                        "line": 49
+                        "line": 75
                     }
                 },
                 "parentNode": {
@@ -372,7 +403,16 @@
                         "name": "parentNode",
                         "type": "any",
                         "returnType": "any",
-                        "line": 53
+                        "line": 79
+                    }
+                },
+                "labelElement": {
+                    "name": "labelElement",
+                    "getSignature": {
+                        "name": "labelElement",
+                        "type": "any",
+                        "returnType": "any",
+                        "line": 83
                     }
                 }
             }
@@ -381,7 +421,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-10a4f4dd90907e7845ffdd2d06f12721",
+            "id": "component-AppComponent-2cea92580bb789027696fb48ae4521c2",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -399,6 +439,14 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "errorMessage",
+                    "defaultValue": "'custom error2'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
                     "name": "form",
                     "type": "any",
                     "optional": false,
@@ -411,7 +459,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 12
+                    "line": 13
                 },
                 {
                     "name": "title",
@@ -429,7 +477,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36
+                    "line": 41
                 }
             ],
             "hostBindings": [],
@@ -437,7 +485,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n})\nexport class AppComponent {\n  title = 'components-library';\n  form: any; ///\n\n  options = [\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ];\n\n  constructor(private formBuilder: FormBuilder) {\n    //tirar construtor\n    this.form = formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n  }\n\n  action() {\n    ///\n    alert('clicked');\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n})\nexport class AppComponent {\n  title = 'components-library';\n  form: any; ///\n  errorMessage = 'custom error2';\n\n  options = [\n    //tirar\n    {\n      value: 'option1',\n      viewValue: 'Option 1',\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2',\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3',\n    },\n  ];\n\n  constructor(private formBuilder: FormBuilder) {\n    //tirar construtor\n    this.form = formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n\n    // setTimeout(() => {\n    //   this.errorMessage = '';\n    // }, 3000);\n  }\n\n  action() {\n    ///\n    alert('clicked');\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -450,7 +498,7 @@
                         "type": "FormBuilder"
                     }
                 ],
-                "line": 26,
+                "line": 27,
                 "jsdoctags": [
                     {
                         "name": "formBuilder",
@@ -461,7 +509,7 @@
                     }
                 ]
             },
-            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<label> aaa </label>\n<form [formGroup]=\"form\">\n    <input base-input [label]=\"'teste'\" id=\"oi\" [disable]=\"true\" formControlName=\"username\" />\n    <input base-input [label]=\"'x'\" [id]=\"'id2'\" formControlName=\"password\" />\n    <br/>\n    <label> aaa </label>\n    \n    control {{form.get('password').errors | json}}\n    \n    <base-error message=\"Teste errir\"></base-error>\n    \n    <base-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [error]=\"'error'\"\n        [disabled]=\"true\"\n    >\n    </base-select>\n\n    <base-button>Hello</base-button>\n</form>\n"
+            "templateData": "<h1>Basic Components Library</h1>\n<a href=\"https://www.npmjs.com/package/basic-component-library\" target=\"_blank\"\n    >Access the NPM Link</a\n>\n\n<label> aaa </label>\n<form [formGroup]=\"form\">\n    <input base-input [label]=\"'teste'\" id=\"oi\" [disable]=\"true\" formControlName=\"username\" [errorMessage]=\"''\" />\n    <div>\n        <input base-input [label]=\"'x'\" [id]=\"'id2'\" formControlName=\"password\" [errorMessage]=\"errorMessage\" />\n    </div>    \n    <input base-input type=\"password\" />\n\n        \n    <!-- <base-error message=\"Teste errir\"></base-error> -->\n<!--     \n    <base-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [error]=\"'error'\"\n        [disabled]=\"false\"\n    >\n    </base-select> -->\n\n    <!-- <base-button>Hello</base-button> -->\n\n</form>\n"
         },
         {
             "name": "BaseButtonComponent",
@@ -546,7 +594,7 @@
         },
         {
             "name": "BaseButtonComponent",
-            "id": "component-BaseButtonComponent-98c4109d3f0259eca5f8c3a5772ba478-1",
+            "id": "component-BaseButtonComponent-33ebcd9e1e5cf89e779054068a0228b9-1",
             "file": "projects/basic-component-library/src/lib/base-button/base-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -565,7 +613,7 @@
             "inputsClass": [
                 {
                     "name": "action",
-                    "defaultValue": "() => alert('clicked')",
+                    "defaultValue": "() => {}",
                     "line": 12
                 },
                 {
@@ -602,7 +650,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'base-button',\n  templateUrl: './base-button.component.html',\n  styleUrls: ['./base-button.component.scss'],\n})\nexport class BaseButtonComponent {\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() action = () => alert('clicked'); ///\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n    selector: 'base-button',\n    templateUrl: './base-button.component.html',\n    styleUrls: ['./base-button.component.scss'],\n})\nexport class BaseButtonComponent {\n    @Input() type: 'primary' | 'secondary' = 'primary';\n    @Input() id = '';\n    @Input() disabled = false;\n    @Input() action = () => {};\n\n    handleClick() {\n        if (!this.disabled) {\n            this.action();\n        }\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1097,12 +1145,20 @@
                 "defaultValue": "() => alert('clicked')"
             },
             {
+                "name": "BASE_INPUT_STYLE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-library/src/lib/base-input/base-input.style.ts",
+                "type": "",
+                "defaultValue": "`\n  display: flex;\n  min-height: 1.2rem;\n  padding: 0.2rem 0.3rem;\n  border: solid 1px;\n  border-radius: 0.4rem;\n  outline: none;\n`"
+            },
+            {
                 "name": "COLORS",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                "file": "projects/basic-component-library/src/lib/theme/colors.constant.ts",
                 "type": "object",
-                "defaultValue": "{\n  disabled: '#d9d9d9',\n}"
+                "defaultValue": "{\n  darkGrey: '#373B40',\n  disabled: '#D9D9D9',\n  error: '#FF0000',\n}"
             },
             {
                 "name": "context",
@@ -1133,6 +1189,14 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/select.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Enabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-library/src/stories/input.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -1300,7 +1364,15 @@
                 "subtype": "variable",
                 "file": "projects/basic-component-library/src/stories/button.stories.ts",
                 "type": "Story<BaseButtonComponent>",
-                "defaultValue": "(args: BaseButtonComponent) => ({\n  props: args,\n  template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
+                "defaultValue": "(args: BaseButtonComponent) => ({\n    props: args,\n    template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/basic-component-library/src/stories/input.stories.ts",
+                "type": "Story<BaseInputDirective>",
+                "defaultValue": "(args: BaseInputDirective) => ({\n  props: args,\n  template: `<input base-input />`,\n})"
             },
             {
                 "name": "Template",
@@ -1364,17 +1436,27 @@
                     "subtype": "variable",
                     "file": "projects/basic-component-library/src/stories/button.stories.ts",
                     "type": "Story<BaseButtonComponent>",
-                    "defaultValue": "(args: BaseButtonComponent) => ({\n  props: args,\n  template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
+                    "defaultValue": "(args: BaseButtonComponent) => ({\n    props: args,\n    template: `\n        <base-button [type]=\"type\" [id]=\"id\" [action]=\"action\">Ok</base-button>\n    `,\n})"
                 }
             ],
-            "projects/basic-component-library/src/lib/utils/colors.constant.ts": [
+            "projects/basic-component-library/src/lib/base-input/base-input.style.ts": [
+                {
+                    "name": "BASE_INPUT_STYLE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-library/src/lib/base-input/base-input.style.ts",
+                    "type": "",
+                    "defaultValue": "`\n  display: flex;\n  min-height: 1.2rem;\n  padding: 0.2rem 0.3rem;\n  border: solid 1px;\n  border-radius: 0.4rem;\n  outline: none;\n`"
+                }
+            ],
+            "projects/basic-component-library/src/lib/theme/colors.constant.ts": [
                 {
                     "name": "COLORS",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                    "file": "projects/basic-component-library/src/lib/theme/colors.constant.ts",
                     "type": "object",
-                    "defaultValue": "{\n  disabled: '#d9d9d9',\n}"
+                    "defaultValue": "{\n  darkGrey: '#373B40',\n  disabled: '#D9D9D9',\n  error: '#FF0000',\n}"
                 }
             ],
             "src/test.ts": [
@@ -1451,6 +1533,24 @@
                     "file": "projects/basic-component-library/src/stories/select.stories.ts",
                     "type": "Story<BaseSelectComponent>",
                     "defaultValue": "(args: BaseSelectComponent) => ({\n  props: args,\n})"
+                }
+            ],
+            "projects/basic-component-library/src/stories/input.stories.ts": [
+                {
+                    "name": "Enabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/basic-component-library/src/stories/input.stories.ts",
+                    "type": "Story<BaseInputDirective>",
+                    "defaultValue": "(args: BaseInputDirective) => ({\n  props: args,\n  template: `<input base-input />`,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -1622,7 +1722,17 @@
                 "linktype": "directive",
                 "name": "BaseInputDirective",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/15",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-library/src/lib/base-input/base-input.style.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BASE_INPUT_STYLE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -1635,7 +1745,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/basic-component-library/src/lib/utils/colors.constant.ts",
+                "filePath": "projects/basic-component-library/src/lib/theme/colors.constant.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -1695,6 +1805,26 @@
             },
             {
                 "filePath": "projects/basic-component-library/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Enabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/basic-component-library/src/stories/input.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -1779,7 +1909,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

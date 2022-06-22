@@ -1,51 +1,34 @@
-// import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-// import { Story, Meta } from '@storybook/angular/types-6-0';
-// import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta } from '@storybook/angular/types-6-0';
 
-// import { BaseErrorModule } from '../lib/base-error/base-error.module';
-// import { BaseInputComponent } from '../lib/base-input/base-input.directive';
+import { BaseInputDirective } from '../lib/base-input/base-input.directive';
 
-// export default {
-//   title: 'Components/Input',
-//   component: BaseInputComponent,
-//   decorators: [
-//     moduleMetadata({
-//       imports: [FormsModule, ReactiveFormsModule, BaseErrorModule],
-//     }),
-//   ],
-// } as Meta;
+export default {
+  title: 'Directives/Input',
+  component: BaseInputDirective,
+} as Meta<BaseInputDirective>;
 
-// const Template: Story<BaseInputComponent> = (args: BaseInputComponent) => ({
-//   props: args,
-// });
+const Template: Story<BaseInputDirective> = (args: BaseInputDirective) => ({
+  props: args,
+  template: `<input base-input [label]="label" [disable]="disable" [errorMessage]="errorMessage" />`,
+});
 
-// export const Enabled = Template.bind({});
-// Enabled.args = {
-//   label: 'Input',
-//   id: 'enabled-input',
-//   control: new FormControl(),
-// };
+export const Enabled = Template.bind({});
+Enabled.args = {
+  label: 'Enabled input',
+  id: 'enabled-input',
+  disable: false,
+};
 
-// export const Disabled = Template.bind({});
-// Disabled.args = {
-//   label: 'Input',
-//   id: 'disabled-input',
-//   disabled: true,
-//   control: new FormControl(),
-// };
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: 'Disabled input',
+  id: 'disabled-input',
+  disable: true,
+};
 
-// export const Masked = Template.bind({});
-// Masked.args = {
-//   label: 'Input with cell mask',
-//   id: 'masked-input',
-//   mask: '(00) 00000-0000',
-//   control: new FormControl(),
-// };
-
-// export const Error = Template.bind({});
-// Error.args = {
-//   label: 'Input',
-//   id: 'error-input',
-//   errors: ['Please fill in the field'],
-//   control: new FormControl(null, [Validators.required]),
-// };
+export const Error = Template.bind({});
+Error.args = {
+  label: 'Input with an error',
+  id: 'error-input',
+  errorMessage: 'Please fill in the field',
+};

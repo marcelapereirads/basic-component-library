@@ -14,7 +14,7 @@ import { BASE_INPUT_STYLE } from './base-input.style';
 import { COLORS } from '../theme/colors.constant';
 
 @Directive({
-  selector: '[base-input]', ////
+  selector: '[base-input]',
 })
 export class BaseInputDirective {
   @HostBinding('style') style = BASE_INPUT_STYLE;
