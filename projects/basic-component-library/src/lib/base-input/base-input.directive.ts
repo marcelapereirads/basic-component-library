@@ -5,6 +5,7 @@ import {
   ElementRef,
   HostBinding,
   ViewContainerRef,
+  ComponentRef,
 } from '@angular/core';
 
 import { BaseErrorComponent } from '../base-error/base-error.component';
@@ -13,7 +14,7 @@ import { BASE_INPUT_STYLE } from './base-input.style';
 import { COLORS } from '../theme/colors.constant';
 
 @Directive({
-  selector: '[base-input]', // TODO: seletor de component
+  selector: '[base-input]', ////
 })
 export class BaseInputDirective {
   @HostBinding('style') style = BASE_INPUT_STYLE;
@@ -37,12 +38,16 @@ export class BaseInputDirective {
 
   @Input() set errorMessage(error: string) {
     if (error) {
-      const errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});
-
-      errorComponent.instance.message = error;
       this.borderColor = COLORS.error;
+
+      this.errorComponent = this.viewContainerRef.createComponent(BaseErrorComponent, {});
+      this.errorComponent.instance.message = error;
     } else {
       this.borderColor = COLORS.darkGrey;
+
+      if (this.errorComponent) {
+        this.errorComponent.destroy();
+      }
     }
   }
 
@@ -58,6 +63,7 @@ export class BaseInputDirective {
 
   private _id = '';
   private _labelClass = '';
+  private errorComponent: ComponentRef<BaseErrorComponent> | undefined;
 
   constructor(
     private elementRef: ElementRef,

@@ -1,5 +1,5 @@
 export const COLORS = {
-  darkGrey: '#484b4f',
-  disabled: '#d9d9d9',
+  darkGrey: '#373B40',
+  disabled: '#D9D9D9',
   error: '#FF0000',
 };
