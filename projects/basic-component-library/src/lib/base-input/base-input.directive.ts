@@ -62,7 +62,7 @@ export class BaseInputDirective {
   }
 
   private _id = '';
-  private _labelClass = '';
+  private labelClass = '';
   private errorComponent: ComponentRef<BaseErrorComponent> | undefined;
 
   constructor(
@@ -81,7 +81,7 @@ export class BaseInputDirective {
   }
 
   get labelElement(): any {
-    return this.parentNode.querySelector(`label.${this._labelClass}`);
+    return this.parentNode.querySelector(`label.${this.labelClass}`);
   }
 
   createElement(element: string, className: string, children?: any[]): void {
@@ -106,14 +106,14 @@ export class BaseInputDirective {
     const className = `base-label${this.sequenceId}`;
     const innerText = this.renderer.createText(labelText);
 
-    this._labelClass = className;
+    this.labelClass = className;
     this.createElement('label', className, [innerText]);
 
     this.renderer.setAttribute(this.labelElement, 'style', `color: ${COLORS.darkGrey}`);
   }
 
   bindInputLabel(): void {
-    if (this._id && this._labelClass) {
+    if (this._id && this.labelClass) {
       this.renderer.setAttribute(this.labelElement, 'for', this._id);
     }
   }

@@ -1,54 +1,128 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SimpleChange } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { BaseInputDirective } from './base-input.directive';
+import { BaseErrorModule } from '../base-error/base-error.module';
 
-xdescribe('BaseInputDirective', () => {
-  let fixture: ComponentFixture<BaseInputDirective>;
-  let component: BaseInputDirective;
+@Component({
+  template: `
+    <form>
+      <input
+        base-input
+        [disable]="disable"
+        [errorMessage]="errorMessage"
+        [label]="label"
+        [id]="id" />
+    </form>
+  `,
+})
+export class AboutComponent {
+  disable = false;
+  errorMessage = '';
+  label = '';
+  id = '';
+}
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [BaseInputDirective],
-    }).compileComponents();
+describe('BaseInputDirective', () => {
+  let component: AboutComponent;
+  let fixture: ComponentFixture<AboutComponent>;
+
+  function getSelector(selector: string) {
+    return fixture.debugElement.query(By.css(selector));
+  }
+
+  function getElement(selector: string) {
+    return getSelector(selector).nativeElement;
+  }
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AboutComponent, BaseInputDirective],
+      imports: [BaseErrorModule],
+    });
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseInputDirective);
+    fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should disable the input', () => {
+    component.disable = true;
+    fixture.detectChanges();
+
+    const el = getElement('input');
+
+    expect(el.style['background-color']).toBe('rgb(217, 217, 217)');
+    expect(el.disabled).toBeTrue();
   });
 
-  //   it('should disable input', () => {
-  //     component.disabled = true;
-  //     component.ngOnChanges({
-  //       disabled: new SimpleChange(null, true, true),
-  //     });
-  //     fixture.detectChanges();
+  it('should enable the input', () => {
+    component.disable = false;
+    fixture.detectChanges();
 
-  //     const input = fixture.debugElement.query(By.css('.input__field')).nativeElement;
+    const el = getElement('input');
 
-  //     expect(component.control.disabled).toBeTrue();
-  //     expect(input).toHaveClass('disabled');
-  //   });
+    expect(el.style['background-color']).toBe('unset');
+    expect(el.disabled).toBeFalse();
+  });
 
-  //   it('should enable input', () => {
-  //     component.disabled = false;
+  it('should show and hide the error message', () => {
+    expect(getElement('input').style['border-color']).toBe('rgb(55, 59, 64)');
 
-  //     component.ngOnChanges({
-  //       disabled: new SimpleChange(null, false, false),
-  //     });
-  //     fixture.detectChanges();
+    component.errorMessage = 'An error has occurred';
+    fixture.detectChanges();
 
-  //     const input = fixture.debugElement.query(By.css('.input__field')).nativeElement;
+    let error = getSelector('base-error');
 
-  //     expect(component.control.disabled).toBeFalse();
-  //     expect(input).not.toHaveClass('disabled');
-  //   });
+    expect(error).toBeTruthy();
+    expect(getElement('input').style['border-color']).toBe('rgb(255, 0, 0)');
+
+    component.errorMessage = '';
+    fixture.detectChanges();
+
+    error = getSelector('base-error');
+
+    expect(error).toBeFalsy();
+    expect(getElement('input').style['border-color']).toBe('rgb(55, 59, 64)');
+  });
+
+  it('should bind the input label to the id', () => {
+    const id = 'label-id';
+    const labelText = 'Name';
+
+    component.id = id;
+    fixture.detectChanges();
+
+    let label = getSelector(`label[for=${id}]`);
+
+    expect(label).toBeFalsy();
+
+    component.label = labelText;
+    fixture.detectChanges();
+
+    label = getSelector(`label[for=${id}]`);
+    expect(label.nativeElement.innerText).toBe(labelText);
+  });
+
+  it('should bind the id to the input label', () => {
+    const id = 'label-id';
+    const labelText = 'Name';
+
+    component.label = labelText;
+    fixture.detectChanges();
+
+    let label = getSelector(`label[for=${id}]`);
+
+    expect(label).toBeFalsy();
+
+    component.id = id;
+    fixture.detectChanges();
+
+    label = getSelector(`label[for=${id}]`);
+    expect(label.nativeElement.innerText).toBe(labelText);
+  });
 });
